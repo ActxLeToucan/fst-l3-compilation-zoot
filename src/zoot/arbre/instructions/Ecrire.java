@@ -18,7 +18,8 @@ public class Ecrire extends Instruction {
 
     @Override
     public String toMIPS() {
-        return "\n# On ecrit la valeur contenue dans $v0\n" +
+        return exp.toMIPS() +
+                "\n# On ecrit la valeur contenue dans $v0\n" +
                 "move $a0, $v0\n" +
                 "li $v0, 1\n" +
                 "syscall\n";
