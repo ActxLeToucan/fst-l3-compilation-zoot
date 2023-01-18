@@ -22,6 +22,10 @@ public class Ecrire extends Instruction {
                 "\n# On ecrit la valeur contenue dans $v0\n" +
                 "move $a0, $v0\n" +
                 "li $v0, 1\n" +
+                "syscall\n" +
+                "# retour chariot\n" +
+                "la $a0, newLine\n" +
+                "li $v0, 4\n" +
                 "syscall\n";
     }
 
