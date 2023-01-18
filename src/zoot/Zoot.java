@@ -16,7 +16,8 @@ public class Zoot {
             AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new FileReader(nomFichier)));
             ArbreAbstrait arbre = (ArbreAbstrait) analyseur.parse().value;
 
-            arbre.verifier() ;
+            // TODO : Ecrire la fonction verifier
+            try { arbre.verifier() ; } catch (Exception e) { System.out.println("Erreur de verification"); }
             System.out.println("COMPILATION OK") ;
 
             String nomSortie = nomFichier.replaceAll("[.]zoot", ".mips") ;

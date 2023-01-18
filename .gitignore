@@ -2,6 +2,7 @@
 out/
 *.iml
 *.jar
+*.mips
 src/zoot/analyse/AnalyseurLexical.java
 
 src/zoot/analyse/AnalyseurSyntaxique.java
