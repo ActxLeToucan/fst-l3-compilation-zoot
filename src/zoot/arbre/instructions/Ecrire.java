@@ -18,7 +18,10 @@ public class Ecrire extends Instruction {
 
     @Override
     public String toMIPS() {
-        throw new UnsupportedOperationException("fonction toMips non définie ") ;
+        return "\n# On ecrit la valeur contenue dans $v0\n" +
+                "move $a0, $v0\n" +
+                "li $v0, 1\n" +
+                "syscall\n";
     }
 
 }
