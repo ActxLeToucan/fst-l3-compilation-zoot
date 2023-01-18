@@ -1,6 +1,5 @@
 .idea/
 out/
-tests/
 *.iml
 *.jar
 src/zoot/analyse/AnalyseurLexical.java
