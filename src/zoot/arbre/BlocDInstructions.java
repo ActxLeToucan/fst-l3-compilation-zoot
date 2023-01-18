@@ -30,7 +30,7 @@ public class BlocDInstructions extends ArbreAbstrait {
     
     @Override
     public String toMIPS() {
-        throw new UnsupportedOperationException("fonction toMips non définie ") ;
+        return programme.stream().map(Instruction::toMIPS).reduce("", String::concat) ;
     }
 
     @Override
