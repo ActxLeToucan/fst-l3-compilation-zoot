@@ -22,7 +22,14 @@ public class Zoot {
 
             String nomSortie = nomFichier.replaceAll("[.]zoot", ".mips") ;
             PrintWriter flot = new PrintWriter(new BufferedWriter(new FileWriter(nomSortie))) ;
-            flot.println(arbre.toMIPS());
+
+            // Header du programme (on a la valeur pour un retour a la ligne + l'etiquette main')
+            String header = ".data\n" +
+                    "newLine: .asciiz \"\\n\"\n" +
+                    ".text\n" +
+                    "main:\n";
+
+            flot.println(header + arbre.toMIPS());
             flot.close() ;
         }
         catch (FileNotFoundException ex) {
