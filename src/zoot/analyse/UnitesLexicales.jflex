@@ -32,20 +32,26 @@ import zoot.exceptions.AnalyseLexicaleException;
 %}
 
 csteE = [0-9]+
+nomVariable = [a-zA-Z][a-zA-Z0-9]*
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
 
 %%
 "//".*                                    { /* DO NOTHING */ }
 
+"variables"            { return symbol(CodesLexicaux.VARIABLES); }
 "debut"                { return symbol(CodesLexicaux.DEBUT); }
 "fin"              	   { return symbol(CodesLexicaux.FIN); }
 
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
 
+"booleen"              { return symbol(CodesLexicaux.BOOLEEN); }
+"entier"               { return symbol(CodesLexicaux.ENTIER); }
+
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
+{nomVariable}          { return symbol(CodesLexicaux.NOMVARIABLE, yytext()); }
 
 {espace}               { }
 .                      { throw new AnalyseLexicaleException(yyline, yycolumn, yytext()) ; }
