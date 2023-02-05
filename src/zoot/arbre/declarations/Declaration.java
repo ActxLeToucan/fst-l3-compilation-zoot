@@ -11,7 +11,6 @@ public class Declaration extends ArbreAbstrait {
 
     public Declaration(String type, String idf, int n) {
         super(n);
-        System.out.println("+> Declaration(" + type + ", " + idf + ", " + n + ")");
         this.idf = idf;
         this.type = type;
 

@@ -1,5 +1,7 @@
-package zoot.arbre;
+package zoot.arbre.declarations;
 
+import zoot.arbre.ArbreAbstrait;
+import zoot.arbre.TableDesSymboles;
 import zoot.arbre.declarations.Declaration;
 import zoot.arbre.instructions.Instruction;
 
@@ -10,7 +12,6 @@ public class BlocDeDeclaration extends ArbreAbstrait {
 
     public BlocDeDeclaration(int n) {
         super(n) ;
-        System.out.println("+> BlocDeDeclaration(" + n + ")");
         programme = new ArrayList<>() ;
     }
     

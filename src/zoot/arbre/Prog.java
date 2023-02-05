@@ -7,7 +7,6 @@ public class Prog extends ArbreAbstrait {
 
     public Prog(int n, ArbreAbstrait bd, ArbreAbstrait bi) {
         super(n);
-        System.out.println("+> Prog()");
         blocDeDeclaration = bd;
         blocDInstructions = bi;
     }
