@@ -1,5 +1,8 @@
 package zoot.arbre;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Prog extends ArbreAbstrait {
 
     ArbreAbstrait blocDeDeclaration;
@@ -18,9 +21,17 @@ public class Prog extends ArbreAbstrait {
 
     @Override
     public String toMIPS() {
+        Map<String, String> dataMap = new HashMap<>();
+        dataMap.put("newLine", "\\n");
+        dataMap.put("true", "vrai");
+        dataMap.put("false", "faux");
+
+        String data = ".data\n" +
+                dataMap.entrySet().stream()
+                .reduce("", (acc, entry) -> acc + entry.getKey() + ": .asciiz \"" + entry.getValue() + "\"\n", (a, b) -> a + b);
+
         // Header du programme (on a la valeur pour un retour a la ligne + l'etiquette main')
-        String header = ".data\n" +
-                "newLine: .asciiz \"\\n\"\n" +
+        String header = data +
                 ".text\n" +
                 "main:\n";
         String footer = "\nli $v0, 10\nsyscall";
