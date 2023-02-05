@@ -10,8 +10,11 @@ public class TableDesSymboles {
     private static TableDesSymboles instance = null;
     private final Map<Entree, Symbole> table;
 
+    private int positionTete;
+
     private TableDesSymboles() {
         table = new HashMap<Entree, Symbole>();
+        positionTete = 0;
     }
 
     public static TableDesSymboles getInstance() {
@@ -25,6 +28,10 @@ public class TableDesSymboles {
         if (table.containsKey(e)) {
             throw new DoubleDeclarationException(e.toString());
         }
+
+        s.setDeplacement(positionTete); // on deplace le symbole a la position du pointeur (qui est la place libre)
+        positionTete -= 4; // on decale le pointeur de 4 (taille d'un element)
+
         table.put(e, s);
     }
 
@@ -35,7 +42,11 @@ public class TableDesSymboles {
         return table.get(e);
     }
 
-    public int getTailleZoneVariables() {
-        return table.size();
+    /**
+     * Retourne la position de la tete de pile (premiere place libre)
+     * @return position (décalage négatif) de la tete de pile par rapport au $sp
+     */
+    public int getPositionTete() {
+        return positionTete;
     }
 }
