@@ -1,6 +1,6 @@
 package zoot.arbre.expressions;
 
-import zoot.exceptions.TypeIncorrectException;
+import zoot.exceptions.TypeInvalideException;
 
 public class ConstanteBooleenne extends Constante {
 
@@ -11,7 +11,7 @@ public class ConstanteBooleenne extends Constante {
     @Override
     public void verifier() {
         if (!cste.matches("true|false")) {
-            throw new TypeIncorrectException("Type " + cste + " incorrect pour une constante booleenne");
+            throw new TypeInvalideException("Type " + cste + " incorrect pour une constante booleenne");
         }
     }
 

@@ -1,6 +1,6 @@
 package zoot.arbre.expressions;
 
-import zoot.exceptions.TypeIncorrectException;
+import zoot.exceptions.TypeInvalideException;
 
 public class ConstanteEntiere extends Constante {
     
@@ -11,7 +11,7 @@ public class ConstanteEntiere extends Constante {
     @Override
     public void verifier() {
         if (!cste.matches("[0-9]+")) {
-            throw new TypeIncorrectException("Type " + cste + " incorrect pour une constante entiere");
+            throw new TypeInvalideException("Type " + cste + " incorrect pour une constante entiere");
         }
     }
 

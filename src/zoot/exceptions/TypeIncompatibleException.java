@@ -1,8 +1,8 @@
 package zoot.exceptions;
 
-public class TypeIncompatibleException extends RuntimeException {
+public class TypeIncompatibleException extends AnalyseException {
 
     public TypeIncompatibleException(String m) {
-        super(m) ;
+        super("ERREUR TYPE INCOMPATIBLE :\n\t" + m) ;
     }
 }
