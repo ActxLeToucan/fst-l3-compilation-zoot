@@ -59,7 +59,7 @@ parser code {:
 /* Terminals (tokens returned by the scanner).  */
 
 terminal Symbol    DEBUT, FIN, POINTVIRGULE, ECRIRE, VARIABLES ;
-terminal String    CSTENTIERE, CSTBOOLEENNE, IDF, ENTIER, BOOLEEN ;
+terminal String    CSTENTIERE, CSTBOOLEENNE, IDF, ENTIER, BOOLEEN, AFC ;
    
 /* Non terminals used in the grammar section.  */
 
@@ -99,6 +99,9 @@ LINST   ::=     LINST:li  INST:i
 
 INST    ::=     ECRIRE EXP:e POINTVIRGULE
                 {: RESULT = new Ecrire(e, eleft + 1) ; :}
+        |
+                IDF:i AFC EXP:e POINTVIRGULE
+                {: RESULT = new Affectation(i, e, eleft + 1) ; :}
                 ;
     
 EXP    ::=      CSTENTIERE:c

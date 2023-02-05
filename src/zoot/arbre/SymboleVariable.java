@@ -9,4 +9,8 @@ public class SymboleVariable extends Symbole {
         super(deplacement);
         this.type = t;
     }
+
+    public Type getType() {
+        return type;
+    }
 }

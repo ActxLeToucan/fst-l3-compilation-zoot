@@ -47,6 +47,7 @@ type = entier|booleen
 
 "booleen"              { return symbol(CodesLexicaux.BOOLEEN, yytext()); }
 "entier"               { return symbol(CodesLexicaux.ENTIER, yytext()); }
+"="                    { return symbol(CodesLexicaux.AFC); }
 
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
 

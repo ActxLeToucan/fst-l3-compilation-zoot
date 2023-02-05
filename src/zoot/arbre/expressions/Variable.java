@@ -1,26 +1,32 @@
 package zoot.arbre.expressions;
 
 import zoot.arbre.EntreeVariable;
+import zoot.arbre.SymboleVariable;
 import zoot.arbre.TableDesSymboles;
+import zoot.exceptions.VariableNonDeclareeException;
 
 public class Variable extends Expression {
     String idf;
+    SymboleVariable s;
     public Variable(String idf, int n) {
         super(n) ;
         this.idf = idf;
+        try {
+            this.s = (SymboleVariable) TableDesSymboles.getInstance().identifier(new EntreeVariable(idf));
+            setType(s.getType());
+        } catch (Exception e) { this.s = null; }
     }
 
     @Override
     public void verifier() {
-        // TODO : Vérifier que la variable est déclarée
-        throw new UnsupportedOperationException("fonction verfier non définie ") ;
+        if (s == null) {
+            throw new VariableNonDeclareeException("Variable " + idf + " non déclarée");
+        }
     }
 
     @Override
     public String toMIPS() {
-        // TODO : Générer le code MIPS pour accéder à la variable (grace a la TDS)
-        int deplacement = TableDesSymboles.getInstance().identifier(new EntreeVariable(idf)).getDeplacement();
         return "\n# On load " + idf + " dans $v0" +
-                "\nlw $v0, " + deplacement + "($s7)\n";
+                "\nlw $v0, " + s.getDeplacement() + "($s7)\n";
     }
 }
