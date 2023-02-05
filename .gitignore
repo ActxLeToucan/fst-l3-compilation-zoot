@@ -8,7 +8,3 @@ src/zoot/analyse/AnalyseurLexical.java
 src/zoot/analyse/AnalyseurSyntaxique.java
 
 src/zoot/analyse/CodesLexicaux.java
-
-src/zoot/analyse/Grammaire.cup
-
-src/zoot/analyse/UnitesLexicales.jflex
