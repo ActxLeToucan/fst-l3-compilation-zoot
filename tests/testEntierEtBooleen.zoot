@@ -1,0 +1,40 @@
+// Doit afficher :
+// 1
+// 1
+// 5
+// vrai
+// faux
+// vrai
+// 1
+// 414
+// vrai
+
+
+variables
+
+    entier f;
+    entier c;
+    booleen b;
+    booleen e;
+
+debut
+
+    f = 1;
+    ecrire f;
+    c = f;
+    f = 5;
+    ecrire c;
+    ecrire f;
+
+    b = vrai;
+    ecrire b;
+    e = b;
+    b = faux;
+    ecrire b;
+    ecrire e;
+
+    ecrire 1;
+    ecrire 414;
+    ecrire vrai;
+
+fin

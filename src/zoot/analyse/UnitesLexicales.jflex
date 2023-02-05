@@ -32,9 +32,11 @@ import zoot.exceptions.AnalyseLexicaleException;
 %}
 
 csteE = [0-9]+
-nomVariable = [a-zA-Z][a-zA-Z0-9]*
+csteB = faux|vrai
+idf = [a-zA-Z][a-zA-Z0-9]*
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
+type = entier|booleen
 
 %%
 "//".*                                    { /* DO NOTHING */ }
@@ -43,15 +45,16 @@ espace = {finDeLigne}  | [ \t\f]
 "debut"                { return symbol(CodesLexicaux.DEBUT); }
 "fin"              	   { return symbol(CodesLexicaux.FIN); }
 
-"ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
+"booleen"              { return symbol(CodesLexicaux.BOOLEEN, yytext()); }
+"entier"               { return symbol(CodesLexicaux.ENTIER, yytext()); }
 
-"booleen"              { return symbol(CodesLexicaux.BOOLEEN); }
-"entier"               { return symbol(CodesLexicaux.ENTIER); }
+"ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
-{nomVariable}          { return symbol(CodesLexicaux.NOMVARIABLE, yytext()); }
+{csteB}      	       { return symbol(CodesLexicaux.CSTBOOLEENNE, yytext()); }
+{idf}                  { return symbol(CodesLexicaux.IDF, yytext()); }
 
 {espace}               { }
 .                      { throw new AnalyseLexicaleException(yyline, yycolumn, yytext()) ; }

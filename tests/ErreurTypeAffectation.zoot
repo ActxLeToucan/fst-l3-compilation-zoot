@@ -1,0 +1,7 @@
+//Erreur affectation d'un entier à un identifiant de type booléen
+//
+variables
+  booleen c;
+debut
+  c = 0;
+fin

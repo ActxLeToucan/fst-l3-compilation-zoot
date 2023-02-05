@@ -1,0 +1,15 @@
+// Doit afficher des erreurs sémantiques pour les lignes
+// 7, 8, 11 et 12
+variables
+  booleen c;
+  entier a;
+debut
+  a = faux;
+  c = 1;
+  c = faux;
+  a = 1;
+  a = c;
+  c = a;
+  ecrire c;
+  ecrire a;
+fin

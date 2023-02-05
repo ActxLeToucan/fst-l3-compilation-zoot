@@ -1,0 +1,28 @@
+//Compile et affiche
+// faux
+// 8
+// 6
+// 3
+// vrai
+// vrai
+//
+variables
+  entier a;
+  entier b;
+  booleen c;
+  entier d;
+  booleen e;
+debut
+  c = vrai;
+  c = faux;
+  a = 8;
+  ecrire c;
+  b = 6;
+  d = 3;
+  e = vrai;
+  ecrire a;
+  ecrire b;
+  ecrire d;
+  ecrire vrai;
+  ecrire e;
+fin

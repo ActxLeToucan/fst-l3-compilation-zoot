@@ -1,0 +1,12 @@
+// Ecrire variable sans initialisation
+// Compile et affiche
+// faux
+// 0
+//
+variables
+  booleen c;
+  entier a;
+debut
+  ecrire c;
+  ecrire a;
+fin
