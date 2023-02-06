@@ -5,30 +5,36 @@ import zoot.arbre.ArbreAbstrait;
 import zoot.arbre.EntreeVariable;
 import zoot.arbre.SymboleVariable;
 import zoot.arbre.TableDesSymboles;
+import zoot.exceptions.DoubleDeclarationException;
 
 public class Declaration extends ArbreAbstrait {
     String idf, type;
+    boolean erreur;
 
     public Declaration(String type, String idf, int n) {
         super(n);
         this.idf = idf;
         this.type = type;
 
-        TableDesSymboles.getInstance().ajouter(
-                new EntreeVariable(idf),
-                new SymboleVariable(
-                        TableDesSymboles.getInstance().getPositionTete(),
-                        this.type.equals("entier") ? Type.ENTIER : Type.BOOLEEN
-                )
-        );
+        try {
+            erreur = false;
+            TableDesSymboles.getInstance().ajouter(
+                    new EntreeVariable(idf),
+                    new SymboleVariable(
+                            TableDesSymboles.getInstance().getPositionTete(),
+                            this.type.equals("entier") ? Type.ENTIER : Type.BOOLEEN
+                    )
+            );
+        } catch (Exception e) { erreur = true; }
     }
 
-    public void verifier() { // TODO : Verification de la déclaration (nom variable déjà utilisé, etc.)
-        throw new UnsupportedOperationException("fonction verfier non définie ") ;
+    public void verifier() {
+        if (erreur) {
+            throw new DoubleDeclarationException("Variable " + idf + " déjà déclarée");
+        }
     }
 
     public String toMIPS() {
-        // TODO : Générer le code MIPS pour la déclaration
-        return "";
+        return "\n# Declaration de la variable "+ idf +"\n";
     }
 }
