@@ -20,7 +20,7 @@ public class Variable extends Expression {
     @Override
     public void verifier() {
         if (s == null) {
-            throw new VariableNonDeclareeException("Variable " + idf + " non déclarée");
+            throw new VariableNonDeclareeException("Variable " + idf + " non déclarée (ligne "+noLigne+")");
         }
     }
 

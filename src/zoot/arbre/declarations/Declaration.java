@@ -30,7 +30,7 @@ public class Declaration extends ArbreAbstrait {
 
     public void verifier() {
         if (erreur) {
-            throw new DoubleDeclarationException("Variable " + idf + " déjà déclarée");
+            throw new DoubleDeclarationException("Variable " + idf + " déjà déclarée (ligne: "+noLigne+")");
         }
     }
 
