@@ -17,7 +17,10 @@ public class Ecrire extends Instruction {
 
     @Override
     public void verifier() {
-        throw new UnsupportedOperationException("fonction verfier non définie ") ;
+        exp.verifier();
+        if (exp.getType() != Type.ENTIER && exp.getType() != Type.BOOLEEN) {
+            throw new TypeInvalideException("Le type devrait etre entier ou booleen");
+        }
     }
 
     @Override

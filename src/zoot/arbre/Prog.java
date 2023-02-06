@@ -16,7 +16,8 @@ public class Prog extends ArbreAbstrait {
 
     @Override
     public void verifier() {
-
+        blocDeDeclaration.verifier();
+        blocDInstructions.verifier();
     }
 
     @Override

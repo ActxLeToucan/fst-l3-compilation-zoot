@@ -26,7 +26,7 @@ public class BlocDInstructions extends ArbreAbstrait {
 
     @Override
     public void verifier() {
-        throw new UnsupportedOperationException("fonction verifier non définie ") ;
+        programme.forEach(Instruction::verifier);
     }
     
     @Override

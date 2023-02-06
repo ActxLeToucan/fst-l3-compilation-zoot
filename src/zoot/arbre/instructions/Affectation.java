@@ -23,7 +23,7 @@ public class Affectation extends Instruction {
     public void verifier() {
         exp.verifier();
         if (s.getType() != exp.getType()) {
-            throw new TypeIncompatibleException("Affectation de type "+exp.getType()+" à une variable de type "+s.getType());
+            throw new TypeIncompatibleException("Affectation de type "+exp.getType()+" à une variable de type "+s.getType()+ " (ligne "+noLigne+")");
         }
     }
 
