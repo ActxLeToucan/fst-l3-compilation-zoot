@@ -32,7 +32,7 @@ public class BlocDeDeclaration extends ArbreAbstrait {
         String declarations = programme.stream().map(Declaration::toMIPS).reduce("", String::concat);
 
         int pos = TableDesSymboles.getInstance().getPositionTete();
-        String suffix = "\n# On reserve l'espace pour " + -pos / 4 + " variables\n" +
+        String suffix = "\n# On reserve l'espace pour " + TableDesSymboles.getInstance().getNbElements() + " variables\n" +
                         "addi $sp, $sp, " + pos + "\n";
 
         return prefix + declarations + suffix ;

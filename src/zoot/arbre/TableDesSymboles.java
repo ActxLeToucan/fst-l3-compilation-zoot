@@ -49,4 +49,8 @@ public class TableDesSymboles {
     public int getPositionTete() {
         return positionTete;
     }
+
+    public int getNbElements() {
+        return table.size();
+    }
 }

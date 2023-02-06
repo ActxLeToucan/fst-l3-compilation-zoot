@@ -22,7 +22,7 @@ public class Ecrire extends Instruction {
 
     @Override
     public String toMIPS() {
-        String ecrire = "";
+        String ecrire;
         Type t = exp.getType();
         if (t == null) {
             throw new TypeInvalideException("Type de l'expression non défini");
@@ -34,8 +34,8 @@ public class Ecrire extends Instruction {
                         "syscall\n";
                 break;
             case BOOLEEN:
-                String alors = "alors_" + UUID.randomUUID().toString().replace("-", "");
-                String finSi = "finSi_" + UUID.randomUUID().toString().replace("-", "");
+                String alors = genererLabel("alors");
+                String finSi = genererLabel("finSi");
 
                 // si $v0 == 0 alors on affiche faux sinon on affiche vrai
                 ecrire = "beq $v0, 0, " + alors + "\n" +
