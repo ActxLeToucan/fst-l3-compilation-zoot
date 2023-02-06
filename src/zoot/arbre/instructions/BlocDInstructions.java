@@ -1,7 +1,6 @@
 package zoot.arbre.instructions;
 
 import zoot.arbre.ArbreAbstrait;
-import zoot.arbre.instructions.Instruction;
 
 import java.util.ArrayList;
 
@@ -12,31 +11,31 @@ import java.util.ArrayList;
  */
 
 public class BlocDInstructions extends ArbreAbstrait {
-    
-    protected ArrayList<Instruction> programme ;
+
+    protected ArrayList<Instruction> programme;
 
     public BlocDInstructions(int n) {
-        super(n) ;
-        programme = new ArrayList<>() ;
+        super(n);
+        programme = new ArrayList<>();
     }
-    
+
     public void ajouter(Instruction i) {
-        programme.add(i) ;
+        programme.add(i);
     }
 
     @Override
     public void verifier() {
         programme.forEach(Instruction::verifier);
     }
-    
+
     @Override
     public String toMIPS() {
-        return programme.stream().map(Instruction::toMIPS).reduce("", String::concat) ;
+        return programme.stream().map(Instruction::toMIPS).reduce("", String::concat);
     }
 
     @Override
     public String toString() {
-        return programme.toString() ;
+        return programme.toString();
     }
 
 }

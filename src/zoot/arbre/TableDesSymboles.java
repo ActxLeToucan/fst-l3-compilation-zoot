@@ -44,6 +44,7 @@ public class TableDesSymboles {
 
     /**
      * Retourne la position de la tete de pile (premiere place libre)
+     *
      * @return position (décalage négatif) de la tete de pile par rapport au $sp
      */
     public int getPositionTete() {

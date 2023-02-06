@@ -7,11 +7,11 @@ public abstract class Expression extends ArbreAbstrait {
     private Type type;
 
     protected Expression(int n) {
-        super(n) ;
+        super(n);
     }
 
     protected Expression(int n, Type t) {
-        super(n) ;
+        super(n);
         this.type = t;
     }
 

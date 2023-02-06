@@ -25,16 +25,18 @@ public class Declaration extends ArbreAbstrait {
                             this.type.equals("entier") ? Type.ENTIER : Type.BOOLEEN
                     )
             );
-        } catch (Exception e) { erreur = true; }
+        } catch (Exception e) {
+            erreur = true;
+        }
     }
 
     public void verifier() {
         if (erreur) {
-            throw new DoubleDeclarationException("Variable " + idf + " déjà déclarée (ligne: "+noLigne+")");
+            throw new DoubleDeclarationException("Variable " + idf + " déjà déclarée (ligne: " + noLigne + ")");
         }
     }
 
     public String toMIPS() {
-        return "\n# Declaration de la variable "+ idf +"\n";
+        return "\n# Declaration de la variable " + idf + "\n";
     }
 }

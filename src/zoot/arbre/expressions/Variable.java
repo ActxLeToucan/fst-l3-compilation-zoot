@@ -8,19 +8,22 @@ import zoot.exceptions.VariableNonDeclareeException;
 public class Variable extends Expression {
     String idf;
     SymboleVariable s;
+
     public Variable(String idf, int n) {
-        super(n) ;
+        super(n);
         this.idf = idf;
         try {
             this.s = (SymboleVariable) TableDesSymboles.getInstance().identifier(new EntreeVariable(idf));
             setType(s.getType());
-        } catch (Exception e) { this.s = null; }
+        } catch (Exception e) {
+            this.s = null;
+        }
     }
 
     @Override
     public void verifier() {
         if (s == null) {
-            throw new VariableNonDeclareeException("Variable " + idf + " non déclarée (ligne "+noLigne+")");
+            throw new VariableNonDeclareeException("Variable " + idf + " non déclarée (ligne " + noLigne + ")");
         }
     }
 

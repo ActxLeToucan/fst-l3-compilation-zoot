@@ -8,14 +8,14 @@ import zoot.exceptions.TypeIncompatibleException;
 
 public class Affectation extends Instruction {
 
-    protected String idf ;
-    protected Expression exp ;
-    private SymboleVariable s;
+    protected String idf;
+    protected Expression exp;
+    private final SymboleVariable s;
 
-    public Affectation (String i, Expression e, int n) {
-        super(n) ;
-        idf = i ;
-        exp = e ;
+    public Affectation(String i, Expression e, int n) {
+        super(n);
+        idf = i;
+        exp = e;
         s = (SymboleVariable) TableDesSymboles.getInstance().identifier(new EntreeVariable(idf));
     }
 
@@ -23,7 +23,7 @@ public class Affectation extends Instruction {
     public void verifier() {
         exp.verifier();
         if (s.getType() != exp.getType()) {
-            throw new TypeIncompatibleException("Affectation de type "+exp.getType()+" à une variable de type "+s.getType()+ " (ligne "+noLigne+")");
+            throw new TypeIncompatibleException("Affectation de type " + exp.getType() + " à une variable de type " + s.getType() + " (ligne " + noLigne + ")");
         }
     }
 

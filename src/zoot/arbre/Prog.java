@@ -29,7 +29,7 @@ public class Prog extends ArbreAbstrait {
 
         String data = ".data\n" +
                 dataMap.entrySet().stream()
-                .reduce("", (acc, entry) -> acc + entry.getKey() + ": .asciiz \"" + entry.getValue() + "\"\n", (a, b) -> a + b);
+                        .reduce("", (acc, entry) -> acc + entry.getKey() + ": .asciiz \"" + entry.getValue() + "\"\n", (a, b) -> a + b);
 
         // Header du programme (on a la valeur pour un retour a la ligne + l'etiquette main')
         String header = data +

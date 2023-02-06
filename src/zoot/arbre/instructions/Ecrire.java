@@ -4,15 +4,13 @@ import zoot.Type;
 import zoot.arbre.expressions.Expression;
 import zoot.exceptions.TypeInvalideException;
 
-import java.util.UUID;
-
 public class Ecrire extends Instruction {
 
-    protected Expression exp ;
+    protected Expression exp;
 
-    public Ecrire (Expression e, int n) {
-        super(n) ;
-        exp = e ;
+    public Ecrire(Expression e, int n) {
+        super(n);
+        exp = e;
     }
 
     @Override
