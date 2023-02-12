@@ -3,6 +3,7 @@ package zoot.arbre.instructions;
 import zoot.arbre.ArbreAbstrait;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * 21 novembre 2018
@@ -30,7 +31,7 @@ public class BlocDInstructions extends ArbreAbstrait {
 
     @Override
     public String toMIPS() {
-        return programme.stream().map(Instruction::toMIPS).reduce("", String::concat);
+        return programme.stream().map(Instruction::toMIPS).collect(Collectors.joining(""));
     }
 
     @Override

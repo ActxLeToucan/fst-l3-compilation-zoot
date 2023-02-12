@@ -2,6 +2,7 @@ package zoot.arbre;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Prog extends ArbreAbstrait {
 
@@ -29,7 +30,8 @@ public class Prog extends ArbreAbstrait {
 
         String data = ".data\n" +
                 dataMap.entrySet().stream()
-                        .reduce("", (acc, entry) -> acc + entry.getKey() + ": .asciiz \"" + entry.getValue() + "\"\n", (a, b) -> a + b);
+                        .map(entry -> entry.getKey() + ": .asciiz \"" + entry.getValue() + "\"\n")
+                        .collect(Collectors.joining(""));
 
         // Header du programme (on a la valeur pour un retour a la ligne + l'etiquette main')
         String header = data +
