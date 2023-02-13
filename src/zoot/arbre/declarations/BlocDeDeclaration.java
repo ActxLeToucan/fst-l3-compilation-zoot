@@ -5,6 +5,7 @@ import zoot.arbre.TableDesSymboles;
 import zoot.exceptions.AnalyseException;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class BlocDeDeclaration extends ArbreAbstrait {
     protected ArrayList<Declaration> programme;
@@ -37,7 +38,7 @@ public class BlocDeDeclaration extends ArbreAbstrait {
         String prefix = "\n# On mets sp dans s7" +
                 "\nmove $s7, $sp\n";
 
-        String declarations = programme.stream().map(Declaration::toMIPS).reduce("", String::concat);
+        String declarations = programme.stream().map(Declaration::toMIPS).collect(Collectors.joining(""));
 
         int pos = TableDesSymboles.getInstance().getPositionTete();
         String suffix = "\n# On reserve l'espace pour " + TableDesSymboles.getInstance().getNbElements() + " variables\n" +

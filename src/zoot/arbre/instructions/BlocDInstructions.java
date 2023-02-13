@@ -5,6 +5,7 @@ import zoot.arbre.declarations.Declaration;
 import zoot.exceptions.AnalyseException;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * 21 novembre 2018
@@ -41,7 +42,7 @@ public class BlocDInstructions extends ArbreAbstrait {
 
     @Override
     public String toMIPS() {
-        return programme.stream().map(Instruction::toMIPS).reduce("", String::concat);
+        return programme.stream().map(Instruction::toMIPS).collect(Collectors.joining(""));
     }
 
     @Override
