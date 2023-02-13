@@ -9,10 +9,11 @@ public class ConstanteEntiere extends Constante {
     }
 
     @Override
-    public void verifier() {
+    public int verifier() {
         if (!cste.matches("[0-9]+")) {
-            throw new TypeInvalideException("Type " + cste + " incorrect pour une constante entiere (ligne: " + noLigne + ")");
+            throw new TypeInvalideException("Type " + cste + " incorrect pour une constante entiere (ligne " + noLigne + ")");
         }
+        return 0;
     }
 
     @Override

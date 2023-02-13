@@ -1,6 +1,8 @@
 package zoot.arbre.instructions;
 
 import zoot.arbre.ArbreAbstrait;
+import zoot.arbre.declarations.Declaration;
+import zoot.exceptions.AnalyseException;
 
 import java.util.ArrayList;
 
@@ -24,8 +26,17 @@ public class BlocDInstructions extends ArbreAbstrait {
     }
 
     @Override
-    public void verifier() {
-        programme.forEach(Instruction::verifier);
+    public int verifier() {
+        int nb_err = 0;
+        for (Instruction inst : programme) {
+            try {
+                inst.verifier();
+            } catch (AnalyseException e) {
+                System.out.println(e.getMessage());
+                nb_err++;
+            }
+        }
+        return nb_err;
     }
 
     @Override

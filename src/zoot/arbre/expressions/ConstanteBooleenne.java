@@ -9,10 +9,11 @@ public class ConstanteBooleenne extends Constante {
     }
 
     @Override
-    public void verifier() {
+    public int verifier() {
         if (!cste.matches("vrai|faux")) {
-            throw new TypeInvalideException("Type " + cste + " incorrect pour une constante booleenne (ligne: " + noLigne + ")");
+            throw new TypeInvalideException("Type " + cste + " incorrect pour une constante booleenne (ligne " + noLigne + ")");
         }
+        return 0;
     }
 
     @Override

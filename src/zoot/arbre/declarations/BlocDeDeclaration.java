@@ -2,6 +2,7 @@ package zoot.arbre.declarations;
 
 import zoot.arbre.ArbreAbstrait;
 import zoot.arbre.TableDesSymboles;
+import zoot.exceptions.AnalyseException;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,17 @@ public class BlocDeDeclaration extends ArbreAbstrait {
     }
 
     @Override
-    public void verifier() {
-        programme.forEach(Declaration::verifier);
+    public int verifier() {
+        int nb_err = 0;
+        for (Declaration decl : programme) {
+            try {
+                decl.verifier();
+            } catch (AnalyseException e) {
+                System.out.println(e.getMessage());
+                nb_err++;
+            }
+        }
+        return nb_err;
     }
 
     @Override

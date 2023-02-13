@@ -3,6 +3,7 @@ package zoot.arbre.expressions;
 import zoot.arbre.EntreeVariable;
 import zoot.arbre.SymboleVariable;
 import zoot.arbre.TableDesSymboles;
+import zoot.exceptions.AnalyseException;
 import zoot.exceptions.VariableNonDeclareeException;
 
 public class Variable extends Expression {
@@ -15,16 +16,17 @@ public class Variable extends Expression {
         try {
             this.s = (SymboleVariable) TableDesSymboles.getInstance().identifier(new EntreeVariable(idf));
             setType(s.getType());
-        } catch (Exception e) {
+        } catch (AnalyseException e) {
             this.s = null;
         }
     }
 
     @Override
-    public void verifier() {
+    public int verifier() {
         if (s == null) {
             throw new VariableNonDeclareeException("Variable " + idf + " non déclarée (ligne " + noLigne + ")");
         }
+        return 0;
     }
 
     @Override

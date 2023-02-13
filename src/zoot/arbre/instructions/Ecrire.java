@@ -2,6 +2,7 @@ package zoot.arbre.instructions;
 
 import zoot.Type;
 import zoot.arbre.expressions.Expression;
+import zoot.exceptions.AnalyseException;
 import zoot.exceptions.TypeInvalideException;
 
 public class Ecrire extends Instruction {
@@ -14,20 +15,20 @@ public class Ecrire extends Instruction {
     }
 
     @Override
-    public void verifier() {
+    public int verifier() {
         exp.verifier();
+
         if (exp.getType() != Type.ENTIER && exp.getType() != Type.BOOLEEN) {
-            throw new TypeInvalideException("Le type devrait etre entier ou booleen");
+            throw new TypeInvalideException("Le type devrait etre entier ou booleen (ligne " + noLigne + ")");
         }
+        return 0;
     }
 
     @Override
     public String toMIPS() {
         String ecrire;
         Type t = exp.getType();
-        if (t == null) {
-            throw new TypeInvalideException("Type de l'expression non défini");
-        }
+
         switch (t) {
             case ENTIER:
                 ecrire = "move $a0, $v0\n" +
@@ -51,6 +52,7 @@ public class Ecrire extends Instruction {
             default:
                 throw new TypeInvalideException("Type de l'expression inconnu : " + t);
         }
+
         return exp.toMIPS() +
                 "\n# On ecrit la valeur contenue dans $v0\n" +
                 ecrire +

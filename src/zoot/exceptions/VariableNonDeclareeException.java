@@ -1,8 +1,8 @@
 package zoot.exceptions;
 
-public class VariableNonDeclareeException extends RuntimeException {
+public class VariableNonDeclareeException extends AnalyseException {
 
     public VariableNonDeclareeException(String m) {
-        super(m);
+        super("ERREUR SEMANTIQUE : VARIABLE NON DECLAREE :\n\t" + m);
     }
 }

@@ -15,9 +15,10 @@ public class Prog extends ArbreAbstrait {
     }
 
     @Override
-    public void verifier() {
-        blocDeDeclaration.verifier();
-        blocDInstructions.verifier();
+    public int verifier() {
+        int nb_err_decl = blocDeDeclaration.verifier();
+        int nb_err_inst = blocDInstructions.verifier();
+        return nb_err_decl + nb_err_inst;
     }
 
     @Override

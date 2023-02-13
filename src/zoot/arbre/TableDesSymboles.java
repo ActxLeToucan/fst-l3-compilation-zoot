@@ -1,7 +1,7 @@
 package zoot.arbre;
 
 import zoot.exceptions.DoubleDeclarationException;
-import zoot.exceptions.IdentifiantNonDeclareException;
+import zoot.exceptions.VariableNonDeclareeException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,9 +35,9 @@ public class TableDesSymboles {
         table.put(e, s);
     }
 
-    public Symbole identifier(Entree e) throws IdentifiantNonDeclareException {
+    public Symbole identifier(Entree e) throws VariableNonDeclareeException {
         if (!table.containsKey(e)) {
-            throw new IdentifiantNonDeclareException(e.toString());
+            throw new VariableNonDeclareeException(e.toString());
         }
         return table.get(e);
     }

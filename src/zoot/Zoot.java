@@ -16,13 +16,13 @@ public class Zoot {
             AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new FileReader(nomFichier)));
             ArbreAbstrait arbre = (ArbreAbstrait) analyseur.parse().value;
 
-            try {
-                arbre.verifier();
-            } catch (Exception e) {
-                System.out.println("Erreur de vérification :\n    " + e.getMessage());
+            int nb_err = arbre.verifier();
+            if (nb_err == 0) {
+                System.out.println("COMPILATION OK");
+            } else {
+                System.out.println("\n" + nb_err + " ERREUR" + (nb_err > 1? "S": "") + " DE COMPILATION");
                 System.exit(1);
             }
-            System.out.println("COMPILATION OK");
 
             String nomSortie = nomFichier.replaceAll("[.]zoot", ".mips");
             PrintWriter flot = new PrintWriter(new BufferedWriter(new FileWriter(nomSortie)));

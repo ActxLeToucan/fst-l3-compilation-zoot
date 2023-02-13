@@ -15,7 +15,7 @@ public abstract class ArbreAbstrait {
         return noLigne;
     }
 
-    public abstract void verifier();
+    public abstract int verifier();
 
     public abstract String toMIPS();
 

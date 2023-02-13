@@ -3,6 +3,8 @@
 variables
   booleen c;
   entier a;
+  booleen c;
+  booleen a;
 debut
   a = faux;
   c = 1;
@@ -10,6 +12,9 @@ debut
   a = 1;
   a = c;
   c = a;
+  e = 8;
+  a = c;
   ecrire c;
   ecrire a;
+  ecrire d;
 fin
