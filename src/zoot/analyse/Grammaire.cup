@@ -58,22 +58,24 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    DEBUT, FIN, POINTVIRGULE, ECRIRE, VARIABLES ;
+terminal Symbol    DEBUT, FIN, POINTVIRGULE, ECRIRE, VARIABLES , FONCTIONS, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE ;
 terminal String    CSTENTIERE, CSTBOOLEENNE, IDF, ENTIER, BOOLEEN, AFC ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait VARS, SCRIPT, PROG, LINST, LDECL ;
+non terminal ArbreAbstrait VARS, SCRIPT, PROG, LINST, LDECL, LFONCTION ;
 non terminal Instruction INST ;
 non terminal Expression EXP ;
 non terminal Declaration DECL ;
+non terminal BlocDeDeclaration PARAMETRES ;
+non terminal Fonction FONCTION ;
 
 /* ----------------------------Grammar Section-------------------- */
 
 start with PROG ;
 
-PROG    ::=     VARIABLES  LDECL:ld  DEBUT  LINST:li  FIN
-                {: Prog p = new Prog(0, ld, li);
+PROG    ::=     VARIABLES  LDECL:ld  FONCTIONS  LFONCTION:lf  DEBUT  LINST:li  FIN
+                {: Prog p = new Prog(0, ld, lf, li);
                    RESULT = p ; :}
                 ;
 
@@ -119,4 +121,25 @@ DECL   ::=      ENTIER:t IDF:v POINTVIRGULE
         |
                 BOOLEEN:t IDF:v POINTVIRGULE
                 {: RESULT = new Declaration(t, v, tleft + 1) ; :}
+                ;
+
+PARAMETRES ::=   PARENTHESE_OUVRANTE  LDECL:ld  PARENTHESE_FERMANTE
+                {: RESULT = new BlocDeDeclaration(ld, dleft + 1) ; :}
+        |
+                PARENTHESE_OUVRANTE  PARENTHESE_FERMANTE
+                {: RESULT = new BlocDeDeclaration(dleft + 1) ; :}
+                ;
+
+FONCTION ::=    DECL:d PARAMETRES:p DEBUT  LINST:li  FIN
+                {: RESULT = new Fonction(d, p, li, dleft + 1) ; :}
+                ;
+
+LFONCTION ::=   LFONCTION:lf FONCTION:f
+                {: ((BlocDeFonctions)lf).ajouter(f) ;
+                   RESULT = lf ; :}
+        |
+                FONCTION:f
+                {: BlocDeFonctions b = new BlocDeFonctions(fleft + 1) ;
+                   b.ajouter(f) ;
+                   RESULT = b ; :}
                 ;

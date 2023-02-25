@@ -42,6 +42,7 @@ type = entier|booleen
 "//".*                                    { /* DO NOTHING */ }
 
 "variables"            { return symbol(CodesLexicaux.VARIABLES); }
+"fonctions"            { return symbol(CodesLexicaux.FONCTIONS); }
 "debut"                { return symbol(CodesLexicaux.DEBUT); }
 "fin"              	   { return symbol(CodesLexicaux.FIN); }
 
@@ -52,6 +53,8 @@ type = entier|booleen
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
+"("                    { return symbol(CodesLexicaux.PARENTHESE_OUVRANTE); }
+")"                    { return symbol(CodesLexicaux.PARENTHESE_FERMANTE); }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 {csteB}      	       { return symbol(CodesLexicaux.CSTBOOLEENNE, yytext()); }
