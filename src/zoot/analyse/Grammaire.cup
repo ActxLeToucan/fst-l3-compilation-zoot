@@ -5,6 +5,7 @@ import zoot.arbre.* ;
 import zoot.arbre.expressions.* ;
 import zoot.arbre.instructions.* ;
 import zoot.arbre.declarations.* ;
+import zoot.arbre.fonctions.* ;
 import zoot.* ;
 import zoot.exceptions.AnalyseSyntaxiqueException;
 
@@ -63,11 +64,11 @@ terminal String    CSTENTIERE, CSTBOOLEENNE, IDF, ENTIER, BOOLEEN, AFC ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait VARS, SCRIPT, PROG, LINST, LDECL, LFONCTION ;
+non terminal ArbreAbstrait VARS, SCRIPT, PROG, LINST, LFONCTION ;
+non terminal BlocDeDeclaration LDECL, PARAMETRES ;
 non terminal Instruction INST ;
 non terminal Expression EXP ;
 non terminal Declaration DECL ;
-non terminal BlocDeDeclaration PARAMETRES ;
 non terminal Fonction FONCTION ;
 
 /* ----------------------------Grammar Section-------------------- */
@@ -124,10 +125,10 @@ DECL   ::=      ENTIER:t IDF:v POINTVIRGULE
                 ;
 
 PARAMETRES ::=   PARENTHESE_OUVRANTE  LDECL:ld  PARENTHESE_FERMANTE
-                {: RESULT = new BlocDeDeclaration(ld, dleft + 1) ; :}
+                {: RESULT = ld ; :}
         |
                 PARENTHESE_OUVRANTE  PARENTHESE_FERMANTE
-                {: RESULT = new BlocDeDeclaration(dleft + 1) ; :}
+                {: RESULT = new BlocDeDeclaration() ; :}
                 ;
 
 FONCTION ::=    DECL:d PARAMETRES:p DEBUT  LINST:li  FIN

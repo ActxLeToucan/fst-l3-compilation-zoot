@@ -1,25 +1,30 @@
 package zoot.arbre;
 
+import zoot.arbre.declarations.BlocDeDeclaration;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Prog extends ArbreAbstrait {
 
-    ArbreAbstrait blocDeDeclaration;
+    BlocDeDeclaration blocDeDeclaration;
+    ArbreAbstrait blocDeFonction;
     ArbreAbstrait blocDInstructions;
 
-    public Prog(int n, ArbreAbstrait bd, ArbreAbstrait bi) {
+    public Prog(int n, BlocDeDeclaration bd, ArbreAbstrait bf, ArbreAbstrait bi) {
         super(n);
         blocDeDeclaration = bd;
+        blocDeFonction = bf;
         blocDInstructions = bi;
     }
 
     @Override
     public int verifier() {
         int nb_err_decl = blocDeDeclaration.verifier();
+        int nb_err_fonc = blocDeFonction.verifier();
         int nb_err_inst = blocDInstructions.verifier();
-        return nb_err_decl + nb_err_inst;
+        return nb_err_decl + nb_err_fonc + nb_err_inst;
     }
 
     @Override
@@ -40,6 +45,10 @@ public class Prog extends ArbreAbstrait {
                 "main:\n";
         String footer = "\nli $v0, 10\nsyscall";
 
-        return header + blocDeDeclaration.toMIPS() + blocDInstructions.toMIPS() + footer;
+        return header
+                + blocDeDeclaration.toMIPS()
+                + blocDeFonction.toMIPS()
+                + blocDInstructions.toMIPS()
+                + footer;
     }
 }

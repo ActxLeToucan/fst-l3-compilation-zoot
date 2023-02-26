@@ -15,6 +15,11 @@ public class BlocDeDeclaration extends ArbreAbstrait {
         programme = new ArrayList<>();
     }
 
+    public BlocDeDeclaration() {
+        super(0);
+        programme = new ArrayList<>();
+    }
+
     public void ajouter(Declaration i) {
         programme.add(i);
     }
