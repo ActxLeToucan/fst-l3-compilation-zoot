@@ -20,6 +20,10 @@ public class EntreeFonction extends Entree {
         return nom + "_" + nbParametres;
     }
 
+    public int getNbParametres() {
+        return nbParametres;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
