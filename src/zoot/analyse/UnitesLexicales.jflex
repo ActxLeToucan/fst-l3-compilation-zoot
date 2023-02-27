@@ -55,6 +55,7 @@ type = entier|booleen
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 "("                    { return symbol(CodesLexicaux.PARENTHESE_OUVRANTE); }
 ")"                    { return symbol(CodesLexicaux.PARENTHESE_FERMANTE); }
+","                    { return symbol(CodesLexicaux.VIRGULE); }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 {csteB}      	       { return symbol(CodesLexicaux.CSTBOOLEENNE, yytext()); }
