@@ -8,9 +8,9 @@ import zoot.arbre.instructions.BlocDInstructions;
 public class Fonction extends ArbreAbstrait {
     Declaration declaration;
     BlocDeDeclaration parametres;
-    ArbreAbstrait instructions;
+    BlocDInstructions instructions;
 
-    public Fonction(Declaration declaration, BlocDeDeclaration parametres, ArbreAbstrait instructions, int n) {
+    public Fonction(Declaration declaration, BlocDeDeclaration parametres, BlocDInstructions instructions, int n) {
         super(n);
         this.declaration = declaration;
         this.parametres = parametres;

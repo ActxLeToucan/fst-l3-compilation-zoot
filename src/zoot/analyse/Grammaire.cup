@@ -64,8 +64,11 @@ terminal String    CSTENTIERE, CSTBOOLEENNE, IDF, ENTIER, BOOLEEN, AFC ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait VARS, SCRIPT, PROG, LINST, LFONCTION, LEXP ;
+non terminal ArbreAbstrait VARS, SCRIPT, PROG ;
 non terminal BlocDeDeclaration LDECL, PARAMETRES ;
+non terminal BlocDInstructions LINST ;
+non terminal BlocDeFonctions LFONCTION ;
+non terminal ListeExpressions LEXP ;
 non terminal Instruction INST ;
 non terminal Expression EXP ;
 non terminal Declaration DECL ;

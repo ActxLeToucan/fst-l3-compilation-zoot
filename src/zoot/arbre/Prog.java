@@ -1,6 +1,8 @@
 package zoot.arbre;
 
 import zoot.arbre.declarations.BlocDeDeclaration;
+import zoot.arbre.fonctions.BlocDeFonctions;
+import zoot.arbre.instructions.BlocDInstructions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,10 +11,10 @@ import java.util.stream.Collectors;
 public class Prog extends ArbreAbstrait {
 
     BlocDeDeclaration blocDeDeclaration;
-    ArbreAbstrait blocDeFonction;
-    ArbreAbstrait blocDInstructions;
+    BlocDeFonctions blocDeFonction;
+    BlocDInstructions blocDInstructions;
 
-    public Prog(int n, BlocDeDeclaration bd, ArbreAbstrait bf, ArbreAbstrait bi) {
+    public Prog(int n, BlocDeDeclaration bd, BlocDeFonctions bf, BlocDInstructions bi) {
         super(n);
         blocDeDeclaration = bd;
         blocDeFonction = bf;
