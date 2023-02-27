@@ -59,12 +59,12 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    DEBUT, FIN, POINTVIRGULE, ECRIRE, VARIABLES , FONCTIONS, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE ;
+terminal Symbol    DEBUT, FIN, POINTVIRGULE, ECRIRE, VARIABLES , FONCTIONS, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, VIRGULE ;
 terminal String    CSTENTIERE, CSTBOOLEENNE, IDF, ENTIER, BOOLEEN, AFC ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait VARS, SCRIPT, PROG, LINST, LFONCTION ;
+non terminal ArbreAbstrait VARS, SCRIPT, PROG, LINST, LFONCTION, LEXP ;
 non terminal BlocDeDeclaration LDECL, PARAMETRES ;
 non terminal Instruction INST ;
 non terminal Expression EXP ;
@@ -115,6 +115,15 @@ EXP    ::=      CSTENTIERE:c
         |
                 IDF:i
                 {: RESULT = new Variable(i, ileft + 1) ; :}
+        |
+                PARENTHESE_OUVRANTE EXP:e PARENTHESE_FERMANTE
+                {: RESULT = e ; :}
+        |
+                IDF:i PARENTHESE_OUVRANTE  LEXP:le  PARENTHESE_FERMANTE
+                {: RESULT = new AppelFonction(i, le, ileft + 1) ; :}
+        |
+                IDF:i PARENTHESE_OUVRANTE PARENTHESE_FERMANTE
+                {: RESULT = new AppelFonction(i, new ListeExpressions(), ileft + 1) ; :}
                 ;
 
 DECL   ::=      ENTIER:t IDF:v POINTVIRGULE
@@ -143,4 +152,14 @@ LFONCTION ::=   LFONCTION:lf FONCTION:f
                 {: BlocDeFonctions b = new BlocDeFonctions(fleft + 1) ;
                    b.ajouter(f) ;
                    RESULT = b ; :}
+                ;
+
+LEXP    ::=     LEXP:le VIRGULE  EXP:e
+                {: ((ListeExpressions)le).ajouter(e) ;
+                   RESULT = le ; :}
+        |
+                EXP:e
+                {: ListeExpressions l = new ListeExpressions(eleft + 1) ;
+                   l.ajouter(e) ;
+                   RESULT = l ; :}
                 ;
