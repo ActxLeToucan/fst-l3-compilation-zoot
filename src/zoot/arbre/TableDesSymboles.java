@@ -33,7 +33,7 @@ public class TableDesSymboles {
      * @return table des symboles du bloc courant + shift
      */
     private Map<Entree, Symbole> getBlocTable(int shift) {
-        if (shift >= tables.size()) { return null; } // plus de blocs a ce niveau
+        if (-shift >= tables.size()) { return null; } // plus de blocs a ce niveau
         return tables.get(tables.size() - 1 + shift);
     }
 

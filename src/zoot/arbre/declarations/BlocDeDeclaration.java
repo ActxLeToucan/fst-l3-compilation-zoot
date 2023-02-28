@@ -29,7 +29,7 @@ public class BlocDeDeclaration extends ArbreAbstrait {
         int nb_err = 0;
         for (Declaration decl : programme) {
             try {
-                decl.verifier();
+                nb_err += decl.verifier();
             } catch (AnalyseException e) {
                 System.out.println(e.getMessage());
                 nb_err++;

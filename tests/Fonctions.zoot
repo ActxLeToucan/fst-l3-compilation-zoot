@@ -7,6 +7,11 @@ variables
     entier b;
     entier tmp;
 fonctions
+    booleen saveA ()
+    debut
+        tmp = a;
+        retourne ecrireBDansA();
+    fin
     booleen loadB ()
     debut
         b = tmp;
@@ -16,11 +21,6 @@ fonctions
     debut
         a = b;
         retourne loadB();
-    fin
-    booleen saveA ()
-    debut
-        tmp = a;
-        retourne ecrireBDansA();
     fin
 debut
     a = 5;

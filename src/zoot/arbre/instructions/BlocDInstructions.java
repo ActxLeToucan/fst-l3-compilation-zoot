@@ -31,7 +31,7 @@ public class BlocDInstructions extends ArbreAbstrait {
         int nb_err = 0;
         for (Instruction inst : instrs) {
             try {
-                inst.verifier();
+                nb_err += inst.verifier();
             } catch (AnalyseException e) {
                 System.out.println(e.getMessage());
                 nb_err++;
