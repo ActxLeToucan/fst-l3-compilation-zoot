@@ -21,22 +21,15 @@ public class AppelFonction extends Expression {
         this.idf = idf;
         this.parametres = parametres;
         this.entree = new EntreeFonction(idf, parametres.size());
-
-        this.erreur = false;
-        try {
-            SymboleFonction sf = (SymboleFonction) TableDesSymboles.getInstance().identifier(this.entree);
-            if (sf == null) {
-                this.erreur = true;
-            } else {
-                this.setType(sf.getType());
-            }
-        } catch (AnalyseException e) { this.erreur = true; }
     }
 
     @Override
     public int verifier() {
-        if (this.erreur) {
-            throw new FonctionNonDeclareeException("Variable " + idf + " non déclarée (ligne " + noLigne + ")");
+        try {
+            SymboleFonction sf = (SymboleFonction) TableDesSymboles.getInstance().identifier(this.entree);
+            this.setType(sf.getType());
+        } catch (AnalyseException e) {
+            throw new FonctionNonDeclareeException("Fonction " + idf + " non déclarée (ligne " + noLigne + ")");
         }
         return 0;
     }

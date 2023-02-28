@@ -3,6 +3,7 @@ package zoot.arbre.fonctions;
 import zoot.arbre.ArbreAbstrait;
 import zoot.arbre.instructions.Instruction;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,7 @@ public class BlocDeFonctions extends ArbreAbstrait {
         int nb_err = 0;
         for (Fonction fun : foncts) {
             try {
-                fun.verifier();
+                nb_err += fun.verifier();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 nb_err++;
@@ -32,7 +33,6 @@ public class BlocDeFonctions extends ArbreAbstrait {
         return nb_err;
     }
 
-    // TODO: toMIPS
     @Override
     public String toMIPS() {
         return foncts.stream().map(Fonction::toMIPS).collect(Collectors.joining(""));

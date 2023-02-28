@@ -1,7 +1,7 @@
 package zoot.arbre.instructions;
 
-import zoot.arbre.ArbreAbstrait;
 import zoot.arbre.expressions.Expression;
+import zoot.exceptions.AnalyseException;
 
 public class ReturnStatement extends Instruction {
     private Expression expression;
@@ -17,6 +17,7 @@ public class ReturnStatement extends Instruction {
 
     @Override
     public int verifier() {
+        expression.verifier();
         return 0;
     }
 

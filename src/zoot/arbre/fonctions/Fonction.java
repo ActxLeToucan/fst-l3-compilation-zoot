@@ -11,6 +11,7 @@ import zoot.exceptions.DoubleDeclarationException;
 
 public class Fonction extends ArbreAbstrait {
     String type, idf;
+    boolean erreur;
     EntreeFonction entree;
     BlocDeDeclaration parametres;
     BlocDInstructions instructions;
@@ -23,7 +24,7 @@ public class Fonction extends ArbreAbstrait {
         this.instructions = instructions;
         this.entree = new EntreeFonction(this.idf, this.parametres.size());
 
-        boolean erreur = false;
+        this.erreur = false;
         try {
             TableDesSymboles.getInstance().ajouter(
                     this.entree,
@@ -34,13 +35,15 @@ public class Fonction extends ArbreAbstrait {
                     )
             );
         } catch (DoubleDeclarationException e) {
-            erreur = true;
+            this.erreur = true;
         }
     }
 
     @Override
     public int verifier() {
-        return instructions.verifier();
+        if (this.erreur)
+            throw new DoubleDeclarationException("Fonction " + idf + " déjà déclarée (ligne " + noLigne + ")");
+        return instructions.verifier() + parametres.verifier();
     }
 
     @Override
