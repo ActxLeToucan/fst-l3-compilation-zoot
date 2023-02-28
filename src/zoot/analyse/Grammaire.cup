@@ -125,9 +125,9 @@ EXP    ::=      CSTENTIERE:c
                 PARENTHESE_OUVRANTE EXP:e PARENTHESE_FERMANTE
                 {: RESULT = e ; :}
         |
-                IDF:i PARENTHESE_OUVRANTE  LEXP:le  PARENTHESE_FERMANTE
-                {: RESULT = new AppelFonction(i, le, ileft + 1) ; :}
-        |
+//                IDF:i PARENTHESE_OUVRANTE  LEXP:le  PARENTHESE_FERMANTE
+//                {: RESULT = new AppelFonction(i, le, ileft + 1) ; :}
+//        |
                 IDF:i PARENTHESE_OUVRANTE PARENTHESE_FERMANTE
                 {: RESULT = new AppelFonction(i, new ListeExpressions(), ileft + 1) ; :}
                 ;
@@ -139,9 +139,9 @@ DECL   ::=      ENTIER:t IDF:v POINTVIRGULE
                 {: RESULT = new Declaration(t, v, tleft + 1) ; :}
                 ;
 
-PARAMETRES ::=  PARENTHESE_OUVRANTE  LDECL:ld  PARENTHESE_FERMANTE
+PARAMETRES ::=  /*PARENTHESE_OUVRANTE  LDECL:ld  PARENTHESE_FERMANTE
                 {: RESULT = ld ; :}
-        |
+        |*/
                 PARENTHESE_OUVRANTE  PARENTHESE_FERMANTE
                 {: RESULT = new BlocDeDeclaration() ; :}
                 ;

@@ -1,25 +1,27 @@
 package zoot.arbre.fonctions;
 
 import zoot.arbre.ArbreAbstrait;
+import zoot.arbre.instructions.Instruction;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class BlocDeFonctions extends ArbreAbstrait {
-    protected ArrayList<Fonction> programme;
+    protected ArrayList<Fonction> foncts;
 
     public BlocDeFonctions(int n) {
         super(n);
-        programme = new ArrayList<>();
+        foncts = new ArrayList<>();
     }
 
     public void ajouter(Fonction i) {
-        programme.add(i);
+        foncts.add(i);
     }
 
     @Override
     public int verifier() {
         int nb_err = 0;
-        for (Fonction fun : programme) {
+        for (Fonction fun : foncts) {
             try {
                 fun.verifier();
             } catch (Exception e) {
@@ -33,6 +35,6 @@ public class BlocDeFonctions extends ArbreAbstrait {
     // TODO: toMIPS
     @Override
     public String toMIPS() {
-        return "";
+        return foncts.stream().map(Fonction::toMIPS).collect(Collectors.joining(""));
     }
 }

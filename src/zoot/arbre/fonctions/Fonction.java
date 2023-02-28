@@ -11,6 +11,7 @@ import zoot.exceptions.DoubleDeclarationException;
 
 public class Fonction extends ArbreAbstrait {
     String type, idf;
+    EntreeFonction entree;
     BlocDeDeclaration parametres;
     BlocDInstructions instructions;
 
@@ -20,11 +21,12 @@ public class Fonction extends ArbreAbstrait {
         this.type = type;
         this.parametres = parametres;
         this.instructions = instructions;
+        this.entree = new EntreeFonction(this.idf, this.parametres.size());
 
         boolean erreur = false;
         try {
             TableDesSymboles.getInstance().ajouter(
-                    new EntreeFonction(this.idf, this.parametres.size()),
+                    this.entree,
                     new SymboleFonction(
                             TableDesSymboles.getInstance().getPositionTete(),
                             this.type.equals("entier") ? Type.ENTIER : Type.BOOLEEN,
@@ -36,15 +38,21 @@ public class Fonction extends ArbreAbstrait {
         }
     }
 
-    // TODO: verifier
     @Override
     public int verifier() {
-        return 0;
+        return instructions.verifier();
     }
 
-    // TODO: toMIPS
     @Override
     public String toMIPS() {
-        return "";
+        String instrs = instructions.toMIPS();
+        String etiquette = this.entree.getLabel();
+        return "\n# <=== DEBUT Fonction " + idf + " ===>" +
+                "\n" + etiquette + ":\n" +
+                "\n# variables (pas encore dans zoot2)" +
+                instrs +
+                "\n# Retour au programme precedent " +
+                "\njr $ra" +
+                "\n# <=== FIN Fonction " + idf + " ===>";
     }
 }

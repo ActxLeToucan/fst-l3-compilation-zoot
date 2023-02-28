@@ -15,21 +15,21 @@ import java.util.stream.Collectors;
 
 public class BlocDInstructions extends ArbreAbstrait {
 
-    protected ArrayList<Instruction> programme;
+    protected ArrayList<Instruction> instrs;
 
     public BlocDInstructions(int n) {
         super(n);
-        programme = new ArrayList<>();
+        instrs = new ArrayList<>();
     }
 
     public void ajouter(Instruction i) {
-        programme.add(i);
+        instrs.add(i);
     }
 
     @Override
     public int verifier() {
         int nb_err = 0;
-        for (Instruction inst : programme) {
+        for (Instruction inst : instrs) {
             try {
                 inst.verifier();
             } catch (AnalyseException e) {
@@ -42,12 +42,12 @@ public class BlocDInstructions extends ArbreAbstrait {
 
     @Override
     public String toMIPS() {
-        return programme.stream().map(Instruction::toMIPS).collect(Collectors.joining(""));
+        return instrs.stream().map(Instruction::toMIPS).collect(Collectors.joining(""));
     }
 
     @Override
     public String toString() {
-        return programme.toString();
+        return instrs.toString();
     }
 
 }

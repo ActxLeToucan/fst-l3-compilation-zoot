@@ -32,6 +32,6 @@ public class Variable extends Expression {
     @Override
     public String toMIPS() {
         return "\n# On load " + idf + " dans $v0" +
-                "\nlw $v0, " + s.getDeplacement() + "($s7)\n";
+                "\nlw $v0, " + s.getDeplacement() + "($" + s.getBase().getRegister() + ")\n";
     }
 }

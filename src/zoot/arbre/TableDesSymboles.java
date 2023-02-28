@@ -53,6 +53,7 @@ public class TableDesSymboles {
         // On deplace le symbole a la position du pointeur (qui est la place libre)
         // = Nombre d'elements deja presents * taille d'un element
         s.setDeplacement(blocTable.size() * ELEMENT_SIZE);
+        s.setBase(tables.size() > 1 ? Base.LOCALE : Base.GLOBALE);
 
         blocTable.put(e, s);
     }
@@ -86,10 +87,28 @@ public class TableDesSymboles {
      * @return position (décalage négatif) de la tete de pile par rapport au $sp
      */
     public int getPositionTete() {
-        return getBlocTable().size() * ELEMENT_SIZE;
+        return -getNbVariables() * ELEMENT_SIZE;
     }
 
-    public int getNbElements() {
-        return getBlocTable().size();
+    public int getNbVariables() {
+        int total = 0;
+        Map<Entree, Symbole> blocTable = getBlocTable();
+        for (Symbole s : blocTable.values()) {
+            if (s instanceof SymboleVariable) {
+                total++;
+            }
+        }
+        return total;
+    }
+
+    public int getNbFonctions() {
+        int total = 0;
+        Map<Entree, Symbole> blocTable = getBlocTable();
+        for (Symbole s : blocTable.values()) {
+            if (s instanceof SymboleFonction) {
+                total++;
+            }
+        }
+        return total;
     }
 }

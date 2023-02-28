@@ -43,6 +43,6 @@ public class Affectation extends Instruction {
     public String toMIPS() {
         return exp.toMIPS() +
                 "\n# On affecte la valeur contenue dans $v0 à la variable " + idf +
-                "\nsw $v0, " + s.getDeplacement() + "($s7)\n";
+                "\nsw $v0, " + s.getDeplacement() + "($" + s.getBase().getRegister() + ")\n";
     }
 }

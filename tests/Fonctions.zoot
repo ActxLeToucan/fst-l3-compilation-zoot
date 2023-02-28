@@ -1,11 +1,33 @@
+// Doit afficher :
+// vrai
+// 10
+// 5
 variables 
     entier a;
+    entier b;
+    entier tmp;
 fonctions
-    booleen fonc1()
+    booleen loadB ()
     debut
+        b = tmp;
         retourne vrai;
+    fin
+    booleen ecrireBDansA ()
+    debut
+        a = b;
+        retourne loadB();
+    fin
+    booleen saveA ()
+    debut
+        tmp = a;
+        retourne ecrireBDansA();
     fin
 debut
     a = 5;
-    ecrire fonc1();
+    b = 10;
+    ecrire a;
+    ecrire b;
+    ecrire saveA();
+    ecrire a;
+    ecrire b;
 fin

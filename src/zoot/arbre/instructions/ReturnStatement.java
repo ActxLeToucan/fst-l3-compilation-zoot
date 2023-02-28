@@ -22,6 +22,8 @@ public class ReturnStatement extends Instruction {
 
     @Override
     public String toMIPS() {
-        return null;
+        return expression.toMIPS() +
+               "\n# On retourne la valeur de l'expression\n" +
+               "sw $v0, 8($s7)";
     }
 }

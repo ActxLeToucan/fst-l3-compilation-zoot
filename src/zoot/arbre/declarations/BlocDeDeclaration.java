@@ -40,16 +40,13 @@ public class BlocDeDeclaration extends ArbreAbstrait {
 
     @Override
     public String toMIPS() {
-        String prefix = "\n# On mets sp dans s7" +
-                "\nmove $s7, $sp\n";
-
         String declarations = programme.stream().map(Declaration::toMIPS).collect(Collectors.joining(""));
 
         int pos = TableDesSymboles.getInstance().getPositionTete();
-        String suffix = "\n# On reserve l'espace pour " + TableDesSymboles.getInstance().getNbElements() + " variables\n" +
+        String suffix = "\n# On reserve l'espace pour " + TableDesSymboles.getInstance().getNbVariables() + " variables\n" +
                 "addi $sp, $sp, " + pos + "\n";
 
-        return prefix + declarations + suffix;
+        return declarations + suffix;
     }
 
     public int size() {

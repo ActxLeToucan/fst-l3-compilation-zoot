@@ -45,9 +45,15 @@ public class Prog extends ArbreAbstrait {
         String header = data +
                 ".text\n" +
                 "main:\n";
-        String footer = "\nli $v0, 10\nsyscall";
+        String footer = "\nli $v0, 10\nsyscall\n";
+
+        String prefix = "\n# On mets sp dans s7" +
+                "\nmove $s7, $sp\n" +
+                "\n# On mets s7 dans s3" +
+                "\nmove $s3, $s7\n";
 
         return header
+                + prefix
                 + blocDeDeclaration.toMIPS()
                 + blocDInstructions.toMIPS()
                 + footer
