@@ -12,6 +12,10 @@ public class EntreeFonction extends Entree {
         this.nbParametres = nbParametres;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
     public String getLabel() {
         return toString();
     }

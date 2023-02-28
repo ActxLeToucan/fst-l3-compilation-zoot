@@ -59,7 +59,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    DEBUT, FIN, POINTVIRGULE, ECRIRE, VARIABLES , FONCTIONS, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, VIRGULE ;
+terminal Symbol    DEBUT, FIN, POINTVIRGULE, ECRIRE, VARIABLES , FONCTIONS, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, VIRGULE, RETURN ;
 terminal String    CSTENTIERE, CSTBOOLEENNE, IDF, ENTIER, BOOLEEN, AFC ;
    
 /* Non terminals used in the grammar section.  */
@@ -108,6 +108,9 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
         |
                 IDF:i AFC EXP:e POINTVIRGULE
                 {: RESULT = new Affectation(i, e, eleft + 1) ; :}
+        |
+                RETURN EXP:e POINTVIRGULE
+                {: RESULT = new ReturnStatement(e, eleft + 1) ; :}
                 ;
     
 EXP    ::=      CSTENTIERE:c
@@ -136,15 +139,18 @@ DECL   ::=      ENTIER:t IDF:v POINTVIRGULE
                 {: RESULT = new Declaration(t, v, tleft + 1) ; :}
                 ;
 
-PARAMETRES ::=   PARENTHESE_OUVRANTE  LDECL:ld  PARENTHESE_FERMANTE
+PARAMETRES ::=  PARENTHESE_OUVRANTE  LDECL:ld  PARENTHESE_FERMANTE
                 {: RESULT = ld ; :}
         |
                 PARENTHESE_OUVRANTE  PARENTHESE_FERMANTE
                 {: RESULT = new BlocDeDeclaration() ; :}
                 ;
 
-FONCTION ::=    DECL:d PARAMETRES:p DEBUT  LINST:li  FIN
-                {: RESULT = new Fonction(d, p, li, dleft + 1) ; :}
+FONCTION ::=    ENTIER:t IDF:v PARAMETRES:p DEBUT  LINST:li  FIN
+                {: RESULT = new Fonction(t, v, p, li, tleft + 1) ; :}
+        |
+                BOOLEEN:t IDF:v PARAMETRES:p DEBUT  LINST:li  FIN
+                {: RESULT = new Fonction(t, v, p, li, tleft + 1) ; :}
                 ;
 
 LFONCTION ::=   LFONCTION:lf FONCTION:f

@@ -52,6 +52,10 @@ public class BlocDeDeclaration extends ArbreAbstrait {
         return prefix + declarations + suffix;
     }
 
+    public int size() {
+        return programme.size();
+    }
+
     @Override
     public String toString() {
         return programme.toString();

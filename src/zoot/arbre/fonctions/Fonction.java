@@ -1,20 +1,39 @@
 package zoot.arbre.fonctions;
 
+import zoot.Type;
 import zoot.arbre.ArbreAbstrait;
+import zoot.arbre.EntreeFonction;
+import zoot.arbre.SymboleFonction;
+import zoot.arbre.TableDesSymboles;
 import zoot.arbre.declarations.BlocDeDeclaration;
-import zoot.arbre.declarations.Declaration;
 import zoot.arbre.instructions.BlocDInstructions;
+import zoot.exceptions.DoubleDeclarationException;
 
 public class Fonction extends ArbreAbstrait {
-    Declaration declaration;
+    String type, idf;
     BlocDeDeclaration parametres;
     BlocDInstructions instructions;
 
-    public Fonction(Declaration declaration, BlocDeDeclaration parametres, BlocDInstructions instructions, int n) {
+    public Fonction(String type, String idf, BlocDeDeclaration parametres, BlocDInstructions instructions, int n) {
         super(n);
-        this.declaration = declaration;
+        this.idf = idf;
+        this.type = type;
         this.parametres = parametres;
         this.instructions = instructions;
+
+        boolean erreur = false;
+        try {
+            TableDesSymboles.getInstance().ajouter(
+                    new EntreeFonction(this.idf, this.parametres.size()),
+                    new SymboleFonction(
+                            TableDesSymboles.getInstance().getPositionTete(),
+                            this.type.equals("entier") ? Type.ENTIER : Type.BOOLEEN,
+                            this.parametres.size()
+                    )
+            );
+        } catch (DoubleDeclarationException e) {
+            erreur = true;
+        }
     }
 
     // TODO: verifier

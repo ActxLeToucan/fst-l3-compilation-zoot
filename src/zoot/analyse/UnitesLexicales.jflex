@@ -51,6 +51,7 @@ type = entier|booleen
 "="                    { return symbol(CodesLexicaux.AFC); }
 
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
+"retourne"             { return symbol(CodesLexicaux.RETURN); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 "("                    { return symbol(CodesLexicaux.PARENTHESE_OUVRANTE); }

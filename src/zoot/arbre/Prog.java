@@ -49,8 +49,8 @@ public class Prog extends ArbreAbstrait {
 
         return header
                 + blocDeDeclaration.toMIPS()
-                + blocDeFonction.toMIPS()
                 + blocDInstructions.toMIPS()
-                + footer;
+                + footer
+                + blocDeFonction.toMIPS();
     }
 }

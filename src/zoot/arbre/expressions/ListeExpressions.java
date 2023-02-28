@@ -5,20 +5,24 @@ import zoot.arbre.ArbreAbstrait;
 import java.util.ArrayList;
 
 public class ListeExpressions extends ArbreAbstrait {
-    protected ArrayList<Expression> programme;
+    protected ArrayList<Expression> params;
 
     public ListeExpressions(int n) {
         super(n);
-        programme = new ArrayList<>();
+        params = new ArrayList<>();
     }
 
     public ListeExpressions() {
         super(0);
-        programme = new ArrayList<>();
+        params = new ArrayList<>();
     }
 
     public void ajouter(Expression i) {
-        programme.add(i);
+        params.add(i);
+    }
+
+    public int size() {
+        return params.size();
     }
 
     @Override
