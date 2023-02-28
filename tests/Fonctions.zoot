@@ -1,0 +1,11 @@
+variables 
+    entier a;
+fonctions
+    booleen fonc1()
+    debut
+        retourne vrai;
+    fin
+debut
+    a = 5;
+    ecrire fonc1();
+fin

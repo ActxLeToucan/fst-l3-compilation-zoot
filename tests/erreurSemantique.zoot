@@ -1,0 +1,15 @@
+// Doit afficher 2 erreurs sémantiques
+// Une liée au fait que f() ne possède pas de retourne
+// Une liée au fait que le programme principal contiennent un retourne
+
+variables
+    entier e;
+fonctions
+    entier f()
+    debut
+        ecrire e;
+    fin
+debut
+    ecrire f();
+    retourne e;
+fin

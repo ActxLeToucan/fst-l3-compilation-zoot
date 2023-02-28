@@ -1,0 +1,16 @@
+// Affiche 2 erreurs sémantique en liens avec le type de retour des fonctions
+variables
+    entier k;
+fonctions
+    booleen e()
+    debut
+        retourne k;
+    fin
+    entier f()
+    debut
+        retourne vrai;
+    fin
+debut
+    ecrire e();
+    ecrire f();
+fin
