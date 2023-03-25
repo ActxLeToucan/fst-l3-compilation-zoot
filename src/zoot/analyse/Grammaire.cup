@@ -65,14 +65,15 @@ terminal String    CSTENTIERE, CSTBOOLEENNE, IDF, ENTIER, BOOLEEN, AFC ;
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait VARS, SCRIPT, PROG ;
-non terminal BlocDeDeclaration LDECL, PARAMETRES ;
+non terminal BlocDeDeclaration LDECL, LDECL_OPTIONNELLE, PARAMETRES ;
 non terminal BlocDInstructions LINST ;
 non terminal BlocDeFonctions LFONCTION ;
-non terminal ListeExpressions LEXP ;
+non terminal ListeExpressions LEXP, LEXP_OPTIONNELLE ;
 non terminal Instruction INST ;
 non terminal Expression EXP ;
 non terminal Declaration DECL ;
 non terminal Fonction FONCTION ;
+non terminal Type TYPE ;
 
 /* ----------------------------Grammar Section-------------------- */
 
@@ -83,6 +84,17 @@ PROG    ::=     VARIABLES  LDECL:ld  FONCTIONS  LFONCTION:lf  DEBUT  LINST:li  F
                    RESULT = p ; :}
                 ;
 
+TYPE    ::=     ENTIER
+                {: RESULT = Type.ENTIER; :}
+        |
+                BOOLEEN
+                {: RESULT = Type.BOOLEEN; :}
+                ;
+
+DECL   ::=      TYPE:t IDF:v POINTVIRGULE
+                {: RESULT = new Declaration(t, v, tleft + 1) ; :}
+                ;
+
 LDECL   ::=     LDECL:ld DECL:d
                 {: ((BlocDeDeclaration)ld).ajouter(d) ;
                    RESULT = ld ; :}
@@ -91,6 +103,12 @@ LDECL   ::=     LDECL:ld DECL:d
                 {: BlocDeDeclaration b = new BlocDeDeclaration(dleft + 1) ;
                    b.ajouter(d) ;
                    RESULT = b ; :}
+                ;
+
+LDECL_OPTIONNELLE ::= LDECL:ld
+                {: RESULT = ld ; :}
+        |
+                {: RESULT = new BlocDeDeclaration() ; :}
                 ;
 
 LINST   ::=     LINST:li  INST:i
@@ -125,33 +143,16 @@ EXP    ::=      CSTENTIERE:c
                 PARENTHESE_OUVRANTE EXP:e PARENTHESE_FERMANTE
                 {: RESULT = e ; :}
         |
-//                IDF:i PARENTHESE_OUVRANTE  LEXP:le  PARENTHESE_FERMANTE
-//                {: RESULT = new AppelFonction(i, le, ileft + 1) ; :}
-//        |
-                IDF:i PARENTHESE_OUVRANTE PARENTHESE_FERMANTE
-                {: RESULT = new AppelFonction(i, new ListeExpressions(), ileft + 1) ; :}
+                IDF:i PARENTHESE_OUVRANTE  LEXP_OPTIONNELLE:le  PARENTHESE_FERMANTE
+                {: RESULT = new AppelFonction(i, le, ileft + 1) ; :}
                 ;
 
-DECL   ::=      ENTIER:t IDF:v POINTVIRGULE
-                {: RESULT = new Declaration(t, v, tleft + 1) ; :}
-        |
-                BOOLEEN:t IDF:v POINTVIRGULE
-                {: RESULT = new Declaration(t, v, tleft + 1) ; :}
-                ;
-
-PARAMETRES ::=  /*PARENTHESE_OUVRANTE  LDECL:ld  PARENTHESE_FERMANTE
+PARAMETRES ::=  PARENTHESE_OUVRANTE  LDECL_OPTIONNELLE:ld  PARENTHESE_FERMANTE
                 {: RESULT = ld ; :}
-        |*/
-                PARENTHESE_OUVRANTE  PARENTHESE_FERMANTE
-                {: RESULT = new BlocDeDeclaration() ; :}
                 ;
 
-FONCTION ::=    ENTIER:t IDF:v PARAMETRES:p DEBUT  LINST:li  FIN
-                {: RESULT = new Fonction(t, v, p, li, tleft + 1) ; :}
-        |
-                BOOLEEN:t IDF:v PARAMETRES:p DEBUT  LINST:li  FIN
-                {: RESULT = new Fonction(t, v, p, li, tleft + 1) ; :}
-                ;
+FONCTION ::=    TYPE:t IDF:v PARAMETRES:p DEBUT  LINST:li  FIN
+                {: RESULT = new Fonction(t, v, p, li, tleft + 1) ; :};
 
 LFONCTION ::=   LFONCTION:lf FONCTION:f
                 {: ((BlocDeFonctions)lf).ajouter(f) ;
@@ -171,4 +172,10 @@ LEXP    ::=     LEXP:le VIRGULE  EXP:e
                 {: ListeExpressions l = new ListeExpressions(eleft + 1) ;
                    l.ajouter(e) ;
                    RESULT = l ; :}
+                ;
+
+LEXP_OPTIONNELLE ::= LEXP:le
+                {: RESULT = le ; :}
+        |
+                {: RESULT = new ListeExpressions() ; :}
                 ;

@@ -1,10 +1,8 @@
 package zoot.arbre.fonctions;
 
-import zoot.arbre.ArbreAbstrait;
 import zoot.arbre.EntreeFonction;
 import zoot.arbre.SymboleFonction;
 import zoot.arbre.TableDesSymboles;
-import zoot.arbre.declarations.BlocDeDeclaration;
 import zoot.arbre.expressions.Expression;
 import zoot.arbre.expressions.ListeExpressions;
 import zoot.exceptions.AnalyseException;

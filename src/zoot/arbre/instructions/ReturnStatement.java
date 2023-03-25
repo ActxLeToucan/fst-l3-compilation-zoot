@@ -1,7 +1,6 @@
 package zoot.arbre.instructions;
 
 import zoot.arbre.expressions.Expression;
-import zoot.exceptions.AnalyseException;
 
 public class ReturnStatement extends Instruction {
     private Expression expression;

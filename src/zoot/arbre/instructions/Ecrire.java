@@ -2,7 +2,6 @@ package zoot.arbre.instructions;
 
 import zoot.Type;
 import zoot.arbre.expressions.Expression;
-import zoot.exceptions.AnalyseException;
 import zoot.exceptions.TypeInvalideException;
 
 public class Ecrire extends Instruction {

@@ -10,13 +10,14 @@ import zoot.arbre.instructions.BlocDInstructions;
 import zoot.exceptions.DoubleDeclarationException;
 
 public class Fonction extends ArbreAbstrait {
-    String type, idf;
+    Type type;
+    String idf;
     boolean erreur;
     EntreeFonction entree;
     BlocDeDeclaration parametres;
     BlocDInstructions instructions;
 
-    public Fonction(String type, String idf, BlocDeDeclaration parametres, BlocDInstructions instructions, int n) {
+    public Fonction(Type type, String idf, BlocDeDeclaration parametres, BlocDInstructions instructions, int n) {
         super(n);
         this.idf = idf;
         this.type = type;
@@ -30,7 +31,7 @@ public class Fonction extends ArbreAbstrait {
                     this.entree,
                     new SymboleFonction(
                             TableDesSymboles.getInstance().getPositionTete(),
-                            this.type.equals("entier") ? Type.ENTIER : Type.BOOLEEN,
+                            this.type,
                             this.parametres.size()
                     )
             );

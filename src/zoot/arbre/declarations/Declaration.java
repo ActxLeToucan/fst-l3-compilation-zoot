@@ -8,10 +8,11 @@ import zoot.arbre.TableDesSymboles;
 import zoot.exceptions.DoubleDeclarationException;
 
 public class Declaration extends ArbreAbstrait {
-    String idf, type;
+    Type type;
+    String idf;
     boolean erreur;
 
-    public Declaration(String type, String idf, int n) {
+    public Declaration(Type type, String idf, int n) {
         super(n);
         this.idf = idf;
         this.type = type;
@@ -22,7 +23,7 @@ public class Declaration extends ArbreAbstrait {
                     new EntreeVariable(idf),
                     new SymboleVariable(
                             TableDesSymboles.getInstance().getPositionTete(),
-                            this.type.equals("entier") ? Type.ENTIER : Type.BOOLEEN
+                            this.type
                     )
             );
         } catch (DoubleDeclarationException e) {

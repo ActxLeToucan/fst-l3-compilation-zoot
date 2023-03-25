@@ -1,7 +1,6 @@
 package zoot.arbre.instructions;
 
 import zoot.arbre.ArbreAbstrait;
-import zoot.arbre.declarations.Declaration;
 import zoot.exceptions.AnalyseException;
 
 import java.util.ArrayList;

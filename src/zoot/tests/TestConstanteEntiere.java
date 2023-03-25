@@ -20,6 +20,7 @@ public class TestConstanteEntiere {
         for (String line : lines) {
             if (line.contains("li $v0, 8")) {
                 valide = true;
+                break;
             }
         }
         assertTrue(valide, "La ligne 'li $v0, 8' n'a pas été trouvée dans le code MIPS généré");

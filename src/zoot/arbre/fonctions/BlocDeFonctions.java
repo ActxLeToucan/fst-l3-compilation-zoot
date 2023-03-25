@@ -1,9 +1,7 @@
 package zoot.arbre.fonctions;
 
 import zoot.arbre.ArbreAbstrait;
-import zoot.arbre.instructions.Instruction;
 
-import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
