@@ -16,7 +16,9 @@ public class Declaration extends ArbreAbstrait {
         super(n);
         this.idf = idf;
         this.type = type;
+    }
 
+    public int verifier() {
         try {
             erreur = false;
             TableDesSymboles.getInstance().ajouter(
@@ -29,9 +31,7 @@ public class Declaration extends ArbreAbstrait {
         } catch (DoubleDeclarationException e) {
             erreur = true;
         }
-    }
 
-    public int verifier() {
         if (erreur) {
             throw new DoubleDeclarationException("Variable " + idf + " déjà déclarée (ligne " + noLigne + ")");
         }

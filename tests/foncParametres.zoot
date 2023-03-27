@@ -1,0 +1,30 @@
+// Doit afficher
+// 2
+// 12
+// 1
+// 10
+
+variables
+    entier e;
+fonctions
+    entier a()
+    variables
+        entier b;
+    debut
+        b = 12;
+        ecrire e;
+        retourne b;
+    fin
+    entier c(entier d;)
+    variables
+        entier f;
+    debut
+        f = 1;
+        ecrire f;
+        retourne d;
+    fin
+debut
+    e = 2;
+    ecrire a();
+    ecrire c(10);
+fin

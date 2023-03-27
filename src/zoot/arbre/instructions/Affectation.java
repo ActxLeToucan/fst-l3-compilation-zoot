@@ -18,18 +18,15 @@ public class Affectation extends Instruction {
         super(n);
         idf = i;
         exp = e;
-        try {
-            this.s = (SymboleVariable) TableDesSymboles.getInstance().identifier(new EntreeVariable(idf));
-        } catch (AnalyseException e1) {
-            this.s = null;
-        }
     }
 
     @Override
     public int verifier() {
         exp.verifier();
 
-        if (s == null) {
+        try {
+            this.s = (SymboleVariable) TableDesSymboles.getInstance().identifier(new EntreeVariable(idf));
+        } catch (AnalyseException e1) {
             throw new VariableNonDeclareeException("Variable " + idf + " non déclarée (ligne " + noLigne + ")");
         }
 

@@ -151,8 +151,8 @@ PARAMETRES ::=  PARENTHESE_OUVRANTE  LDECL_OPTIONNELLE:ld  PARENTHESE_FERMANTE
                 {: RESULT = ld ; :}
                 ;
 
-FONCTION ::=    TYPE:t IDF:v PARAMETRES:p DEBUT  LINST:li  FIN
-                {: RESULT = new Fonction(t, v, p, li, tleft + 1) ; :};
+FONCTION ::=    TYPE:t IDF:v PARAMETRES:p  VARIABLES LDECL_OPTIONNELLE:ld DEBUT  LINST:li  FIN
+                {: RESULT = new Fonction(t, v, p, ld, li, tleft + 1) ; :};
 
 LFONCTION ::=   LFONCTION:lf FONCTION:f
                 {: ((BlocDeFonctions)lf).ajouter(f) ;

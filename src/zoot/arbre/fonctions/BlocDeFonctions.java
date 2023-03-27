@@ -22,6 +22,14 @@ public class BlocDeFonctions extends ArbreAbstrait {
         int nb_err = 0;
         for (Fonction fun : foncts) {
             try {
+                nb_err += fun.ajouter();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                nb_err++;
+            }
+        }
+        for (Fonction fun : foncts) {
+            try {
                 nb_err += fun.verifier();
             } catch (Exception e) {
                 System.out.println(e.getMessage());

@@ -1,0 +1,27 @@
+// Doit afficher
+// 12
+// 1
+// 10
+
+variables
+    entier e;
+fonctions
+    entier k()
+    variables
+        entier x;
+    debut
+        x = 12;
+        retourne x;
+    fin
+    entier k(entier e;)
+    variables
+        entier x;
+    debut
+        x = 1;
+        ecrire x;
+        retourne e;
+    fin
+debut
+    ecrire k();
+    ecrire k(10);
+fin

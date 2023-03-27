@@ -34,7 +34,7 @@ public class AppelFonction extends Expression {
 
     @Override
     public String toMIPS() {
-        // Ordre des valeurs stockees:
+        // Ordre des valeurs stockees :
         // - Variable resultat de la fonction
         // - Adresse retour de la fonction
         // - Parametres de la fonction
@@ -44,7 +44,7 @@ public class AppelFonction extends Expression {
         String setup = "\n# Appel de fonction (" + idf + ")" +
                 "\n# Resultat de fonction\naddi $sp, $sp, -4" +
                 "\n# Adresse de retour\naddi $sp, $sp, -4\nsw $ra, 4($sp)" +
-                //"\n# Parametres de la fonction\nmove $s7, $sp\n" + parametres.toMIPS() +
+                "\n# Parametres de la fonction\nmove $s7, $sp\n" + parametres.toMIPS() +
                 //"\n# Variables de la fonction\nmove $s7, $sp\n"
                 "\n# On mets s7 au debut des variables locales de la fonction\nmove $s7, $sp" +
                 "";

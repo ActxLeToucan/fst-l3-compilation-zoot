@@ -13,17 +13,14 @@ public class Variable extends Expression {
     public Variable(String idf, int n) {
         super(n);
         this.idf = idf;
-        try {
-            this.s = (SymboleVariable) TableDesSymboles.getInstance().identifier(new EntreeVariable(idf));
-            setType(s.getType());
-        } catch (AnalyseException e) {
-            this.s = null;
-        }
     }
 
     @Override
     public int verifier() {
-        if (s == null) {
+        try {
+            this.s = (SymboleVariable) TableDesSymboles.getInstance().identifier(new EntreeVariable(idf));
+            setType(s.getType());
+        } catch (AnalyseException e) {
             throw new VariableNonDeclareeException("Variable " + idf + " non déclarée (ligne " + noLigne + ")");
         }
         return 0;

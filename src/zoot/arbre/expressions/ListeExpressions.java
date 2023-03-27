@@ -31,7 +31,14 @@ public class ListeExpressions extends ArbreAbstrait {
     }
 
     @Override
-    public String toMIPS() {
-        return ""; // TODO : zoot3 parametres ! (execution expression, copie du resultat + decalage de $sp pour le prochain parametre)
+    public String toMIPS() { // execution expression, copie du resultat + decalage de $sp pour le prochain parametre
+        String str = "";
+        for (Expression param : params) {
+            str += "# Gestion du parametre " + param + "\n";
+            str += param.toMIPS() + "\n";
+            str += "sw $v0, 0($sp)\n";
+            str += "addi $sp, $sp, -4\n";
+        }
+        return str;
     }
 }

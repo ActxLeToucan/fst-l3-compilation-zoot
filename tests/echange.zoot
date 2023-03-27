@@ -8,16 +8,19 @@ variables
     entier tmp;
 fonctions
     booleen saveA ()
+    variables
     debut
         tmp = a;
         retourne ecrireBDansA();
     fin
     booleen ecrireBDansA ()
+    variables
     debut
         a = b;
         retourne ecrireB();
     fin
     booleen ecrireB ()
+    variables
     debut
         b = tmp;
         retourne vrai;
