@@ -12,7 +12,7 @@ public class TableDesSymboles {
     private static TableDesSymboles instance = null;
     private final Map<Integer, Map<Entree, Symbole>> tables;
 
-    private final int ELEMENT_SIZE = 4; // taille d'un element (en octets)
+    public static final int ELEMENT_SIZE = 4; // taille d'un element (en octets)
     public static final int BASE_TABLE = 0; // base programme principal
     private int currentTable = BASE_TABLE;
     private int TABLE_ID_COUNTER = 1;
@@ -38,7 +38,6 @@ public class TableDesSymboles {
     }
 
     public void ajouter(Entree e, Symbole s) throws DoubleDeclarationException {
-        System.out.println("Ajout de " + e + " dans la table " + currentTable + " (" + s + ")");
         Map<Entree, Symbole> blocTable = getBlocTable();
         if (blocTable.containsKey(e)) {
             throw new DoubleDeclarationException(e.toString());
@@ -50,7 +49,6 @@ public class TableDesSymboles {
         s.setBase(tables.size() > 1 ? Base.LOCALE : Base.GLOBALE);
 
         blocTable.put(e, s);
-        System.out.println("Taile: " + getNbVariables());
     }
 
     public Symbole identifier(Entree e) throws VariableNonDeclareeException {
@@ -73,7 +71,6 @@ public class TableDesSymboles {
         int idTable = TABLE_ID_COUNTER++;
         tables.put(idTable, new HashMap<>()); // on ajoute un nouveau bloc
         currentTable = idTable;
-        System.out.println("Entree dans le bloc " + idTable + " (taille: " + getNbVariables() + ")");
         return idTable;
     }
 
@@ -81,13 +78,11 @@ public class TableDesSymboles {
         currentTable = idTable;
         if (!tables.containsKey(idTable))
             throw new RuntimeException("Bloc " + idTable + " n'existe pas");
-        System.out.println("Utilisation du bloc " + idTable +  " (taille: " + getNbVariables() + ")");
     }
 
     public void sortieBloc() {
         tables.remove(currentTable); // on supprime le bloc courant
         currentTable = BASE_TABLE; // on revient au bloc parent
-        System.out.println("Sortie du bloc " + currentTable + " (taille: " + getNbVariables() + ")");
     }
 
     /**

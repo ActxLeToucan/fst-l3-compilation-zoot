@@ -65,10 +65,10 @@ public class Fonction extends ArbreAbstrait {
 
         return "\n# <=== DEBUT Fonction " + idf + " ===>" +
                 "\n" + etiquette + ":\n" +
-                "\n# ==> Parametres + Variables " +
-                // variables.toMips() compte aussi de decalage pour les parametres car ils sont dans la meme
-                // table des symboles, donc on n'ajoute pas le .toMips() des parametres
-                variables +
+                "\n# ==> Variables " +
+                // les parametres sont intialises avant l'appel de fonction
+                "\n# On reserve l'espace pour " + this.variables.size() + " variables\n" +
+                "addi $sp, $sp, " + ( - this.variables.size() * TableDesSymboles.ELEMENT_SIZE) + "\n" +
                 "\n# ==> Instructions " +
                 instrs +
                 "\n# Effacement des variables locales " +
