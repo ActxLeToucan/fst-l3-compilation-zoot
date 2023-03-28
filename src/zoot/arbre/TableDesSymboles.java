@@ -46,7 +46,7 @@ public class TableDesSymboles {
         // On deplace le symbole a la position du pointeur (qui est la place libre)
         // = Nombre d'elements deja presents * taille d'un element
         s.setDeplacement(blocTable.size() * ELEMENT_SIZE);
-        s.setBase(tables.size() > 1 ? Base.LOCALE : Base.GLOBALE);
+        s.setBase(currentTable == BASE_TABLE ? Base.GLOBALE : Base.LOCALE);
 
         blocTable.put(e, s);
     }
