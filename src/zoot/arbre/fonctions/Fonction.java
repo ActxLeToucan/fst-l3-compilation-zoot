@@ -71,10 +71,6 @@ public class Fonction extends ArbreAbstrait {
                 "addi $sp, $sp, " + ( - this.variables.size() * TableDesSymboles.ELEMENT_SIZE) + "\n" +
                 "\n# ==> Instructions " +
                 instrs +
-                "\n# Effacement des variables locales " +
-                "\nmove $sp, $s7" +
-                "\n# Retour au programme precedent " +
-                "\njr $ra" +
                 "\n# <=== FIN Fonction " + idf + " ===>";
     }
 }

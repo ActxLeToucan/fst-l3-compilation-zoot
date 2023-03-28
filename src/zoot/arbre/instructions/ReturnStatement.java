@@ -24,6 +24,10 @@ public class ReturnStatement extends Instruction {
     public String toMIPS() {
         return expression.toMIPS() +
                "\n# On retourne la valeur de l'expression\n" +
-               "sw $v0, 8($s7)";
+               "sw $v0, 8($s7)" +
+               "\n# Effacement des variables locales " +
+               "\nmove $sp, $s7" +
+               "\n# Retour au programme precedent " +
+               "\njr $ra";
     }
 }
