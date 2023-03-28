@@ -10,7 +10,6 @@ import zoot.exceptions.DoubleDeclarationException;
 public class Declaration extends ArbreAbstrait {
     Type type;
     String idf;
-    boolean erreur;
 
     public Declaration(Type type, String idf, int n) {
         super(n);
@@ -20,7 +19,6 @@ public class Declaration extends ArbreAbstrait {
 
     public int verifier() {
         try {
-            erreur = false;
             TableDesSymboles.getInstance().ajouter(
                     new EntreeVariable(idf),
                     new SymboleVariable(
@@ -29,10 +27,6 @@ public class Declaration extends ArbreAbstrait {
                     )
             );
         } catch (DoubleDeclarationException e) {
-            erreur = true;
-        }
-
-        if (erreur) {
             throw new DoubleDeclarationException("Variable " + idf + " déjà déclarée (ligne " + noLigne + ")");
         }
         return 0;

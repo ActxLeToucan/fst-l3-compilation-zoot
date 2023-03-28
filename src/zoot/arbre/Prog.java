@@ -52,6 +52,8 @@ public class Prog extends ArbreAbstrait {
                 "\n# On mets s7 dans s3" +
                 "\nmove $s3, $s7\n";
 
+        TableDesSymboles.getInstance().utiliserBloc(TableDesSymboles.BASE_TABLE);
+
         return header
                 + prefix
                 + blocDeDeclaration.toMIPS()

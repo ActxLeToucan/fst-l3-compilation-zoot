@@ -37,25 +37,29 @@ public class AppelFonction extends Expression {
         // Ordre des valeurs stockees :
         // - Variable resultat de la fonction
         // - Adresse retour de la fonction
+        // === appel de fonction ===
         // - Parametres de la fonction
         // - Variables locales de la fonction
+        // === retour de fonction ===
 
         // avant
         String setup = "\n# Appel de fonction (" + idf + ")" +
                 "\n# Resultat de fonction\naddi $sp, $sp, -4" +
                 "\n# Adresse de retour\naddi $sp, $sp, -4\nsw $ra, 4($sp)" +
-                "\n# Parametres de la fonction\nmove $s7, $sp\n" + parametres.toMIPS() +
-                //"\n# Variables de la fonction\nmove $s7, $sp\n"
                 "\n# On mets s7 au debut des variables locales de la fonction\nmove $s7, $sp" +
+                "\n# Parametres de la fonction (" + parametres.size() + ")\n" +
+                parametres.toMIPS() +
                 "";
         // appel
         String call = "\n# Appel de la fonction " + idf + "\njal " + this.entree.getLabel() ;
         // apres
         String teardown = "\n# Retour de la fonction " + idf +
                 // "\n# On skip les parametres de la fonction\n" +
-                "\n# Recuperation de l'adresse de retour\nlw $ra, 4($s7)\naddi $sp, $sp, 4" +
-                "\n# Recuperation de la valeur de retour\nlw $v0, 8($s7)\naddi $sp, $sp, 4" +
-                "\n# On remets s7 a sa position precedente\nmove $s7, $sp";
+                "\n# Recuperation de l'adresse de retour\nlw $ra, 4($sp)\naddi $sp, $sp, 4" +
+                "\n# Recuperation de la valeur de retour\nlw $v0, 4($sp)\naddi $sp, $sp, 4" +
+                "\n# On remets s7 a sa position precedente" +
+                "\nmove $s7, $sp # s7 en haut des variables locales de la fonction" +
+                "\naddi $s7, $s7, " + ( - TableDesSymboles.getInstance().getPositionTete() ) + " # s7 en bas des variables locales de la fonction";
 
         return setup + call + teardown + "\n";
     }

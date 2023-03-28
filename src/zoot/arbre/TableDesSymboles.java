@@ -10,13 +10,16 @@ import java.util.List;
 
 public class TableDesSymboles {
     private static TableDesSymboles instance = null;
-    private final List<Map<Entree, Symbole>> tables;
+    private final Map<Integer, Map<Entree, Symbole>> tables;
 
     private final int ELEMENT_SIZE = 4; // taille d'un element (en octets)
+    public static final int BASE_TABLE = 0; // base programme principal
+    private int currentTable = BASE_TABLE;
+    private int TABLE_ID_COUNTER = 1;
 
     private TableDesSymboles() {
-        tables = new ArrayList<>();
-        tables.add(new HashMap<>()); // programme principal
+        tables = new HashMap<>();
+        tables.put(BASE_TABLE, new HashMap<>()); // programme principal, table 0
     }
 
     /**
@@ -24,17 +27,7 @@ public class TableDesSymboles {
      * @return table des symboles du bloc courant
      */
     private Map<Entree, Symbole> getBlocTable() {
-        return tables.get(tables.size() - 1);
-    }
-
-    /**
-     * Retourne la table des symboles du bloc courant + shift
-     * @param shift décalage par rapport au bloc courant (-1 => un bloc en dessous)
-     * @return table des symboles du bloc courant + shift
-     */
-    private Map<Entree, Symbole> getBlocTable(int shift) {
-        if (-shift >= tables.size()) { return null; } // plus de blocs a ce niveau
-        return tables.get(tables.size() - 1 + shift);
+        return tables.get(currentTable);
     }
 
     public static TableDesSymboles getInstance() {
@@ -45,6 +38,7 @@ public class TableDesSymboles {
     }
 
     public void ajouter(Entree e, Symbole s) throws DoubleDeclarationException {
+        System.out.println("Ajout de " + e + " dans la table " + currentTable + " (" + s + ")");
         Map<Entree, Symbole> blocTable = getBlocTable();
         if (blocTable.containsKey(e)) {
             throw new DoubleDeclarationException(e.toString());
@@ -56,30 +50,44 @@ public class TableDesSymboles {
         s.setBase(tables.size() > 1 ? Base.LOCALE : Base.GLOBALE);
 
         blocTable.put(e, s);
+        System.out.println("Taile: " + getNbVariables());
     }
 
     public Symbole identifier(Entree e) throws VariableNonDeclareeException {
         Symbole res = null;
 
-        int level = 0;
-        while (res == null) {
-            Map<Entree, Symbole> blocTable = getBlocTable(level);
-            if (blocTable == null) { break; } // on est sorti du programme principal (pas de blocs en dessous)
-
+        // on cherche dans le bloc courant
+        Map<Entree, Symbole> blocTable = getBlocTable();
+        if (blocTable != null)
             res = blocTable.get(e);
-            level--;
-        }
+
+        // si non trouve, on cherche dans le bloc parent
+        if (res == null)
+            res = tables.get(0).get(e);
 
         if (res == null) { throw new VariableNonDeclareeException(e.toString()); }
         return res;
     }
 
-    public void entreeBloc() {
-        tables.add(new HashMap<>()); // on ajoute un nouveau bloc
+    public int entreeBloc() {
+        int idTable = TABLE_ID_COUNTER++;
+        tables.put(idTable, new HashMap<>()); // on ajoute un nouveau bloc
+        currentTable = idTable;
+        System.out.println("Entree dans le bloc " + idTable + " (taille: " + getNbVariables() + ")");
+        return idTable;
+    }
+
+    public void utiliserBloc(int idTable) {
+        currentTable = idTable;
+        if (!tables.containsKey(idTable))
+            throw new RuntimeException("Bloc " + idTable + " n'existe pas");
+        System.out.println("Utilisation du bloc " + idTable +  " (taille: " + getNbVariables() + ")");
     }
 
     public void sortieBloc() {
-        tables.remove(tables.size() - 1); // on supprime le dernier bloc
+        tables.remove(currentTable); // on supprime le bloc courant
+        currentTable = BASE_TABLE; // on revient au bloc parent
+        System.out.println("Sortie du bloc " + currentTable + " (taille: " + getNbVariables() + ")");
     }
 
     /**

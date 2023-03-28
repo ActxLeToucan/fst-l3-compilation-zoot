@@ -20,15 +20,15 @@ public class BlocDeFonctions extends ArbreAbstrait {
     @Override
     public int verifier() {
         int nb_err = 0;
-        for (Fonction fun : foncts) {
+        for (Fonction fun : foncts) { // creation des fonctions
             try {
-                nb_err += fun.ajouter();
+                nb_err += fun.creer();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 nb_err++;
             }
         }
-        for (Fonction fun : foncts) {
+        for (Fonction fun : foncts) { // verification des corps des fonctions
             try {
                 nb_err += fun.verifier();
             } catch (Exception e) {

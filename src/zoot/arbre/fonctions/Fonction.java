@@ -13,6 +13,7 @@ public class Fonction extends ArbreAbstrait {
     boolean erreur;
     Type type;
     String idf;
+    int TDSBlocId;
     BlocDeDeclaration parametres;
     BlocDeDeclaration variables;
     EntreeFonction entree;
@@ -28,7 +29,7 @@ public class Fonction extends ArbreAbstrait {
         this.entree = new EntreeFonction(this.idf, this.parametres.size());
     }
 
-    public int ajouter() {
+    public int creer() {
         try {
             TableDesSymboles.getInstance().ajouter(
                     this.entree,
@@ -46,26 +47,32 @@ public class Fonction extends ArbreAbstrait {
 
     @Override
     public int verifier() {
-        TableDesSymboles.getInstance().entreeBloc();
+        TDSBlocId = TableDesSymboles.getInstance().entreeBloc();
         int resParams = parametres.verifier();
         int resVars = variables.verifier();
         int resInsts = instructions.verifier();
-        TableDesSymboles.getInstance().sortieBloc();
         return resParams + resVars + resInsts;
     }
 
     @Override
     public String toMIPS() {
+        TableDesSymboles.getInstance().utiliserBloc(TDSBlocId);
         String params = this.parametres.toMIPS();
         String variables = this.variables.toMIPS();
         String instrs = instructions.toMIPS();
         String etiquette = this.entree.getLabel();
+        TableDesSymboles.getInstance().sortieBloc();
 
         return "\n# <=== DEBUT Fonction " + idf + " ===>" +
                 "\n" + etiquette + ":\n" +
-                params +
+                "\n# ==> Parametres + Variables " +
+                // variables.toMips() compte aussi de decalage pour les parametres car ils sont dans la meme
+                // table des symboles, donc on n'ajoute pas le .toMips() des parametres
                 variables +
+                "\n# ==> Instructions " +
                 instrs +
+                "\n# Effacement des variables locales " +
+                "\nmove $sp, $s7" +
                 "\n# Retour au programme precedent " +
                 "\njr $ra" +
                 "\n# <=== FIN Fonction " + idf + " ===>";
