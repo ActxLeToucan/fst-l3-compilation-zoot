@@ -1,10 +1,12 @@
 package zoot.arbre.declarations;
 
+import zoot.Type;
 import zoot.arbre.ArbreAbstrait;
 import zoot.arbre.TableDesSymboles;
 import zoot.exceptions.AnalyseException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class BlocDeDeclaration extends ArbreAbstrait {
@@ -22,6 +24,10 @@ public class BlocDeDeclaration extends ArbreAbstrait {
 
     public void ajouter(Declaration i) {
         programme.add(i);
+    }
+
+    public List<Type> getTypes() {
+        return programme.stream().map(Declaration::getType).collect(Collectors.toList());
     }
 
     @Override

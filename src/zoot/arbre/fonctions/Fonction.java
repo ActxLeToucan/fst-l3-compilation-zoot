@@ -36,7 +36,8 @@ public class Fonction extends ArbreAbstrait {
                     new SymboleFonction(
                             TableDesSymboles.getInstance().getPositionTete(),
                             this.type,
-                            this.parametres.size()
+                            this.parametres.size(),
+                            this.parametres.getTypes()
                     )
             );
         } catch (DoubleDeclarationException e) {

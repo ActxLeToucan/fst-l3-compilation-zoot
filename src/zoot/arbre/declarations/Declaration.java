@@ -35,4 +35,8 @@ public class Declaration extends ArbreAbstrait {
     public String toMIPS() {
         return "\n# Declaration de la variable " + idf + "\n";
     }
+
+    public Type getType() {
+        return type;
+    }
 }
