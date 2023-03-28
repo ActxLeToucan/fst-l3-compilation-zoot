@@ -1,8 +1,11 @@
 package zoot.arbre.expressions;
 
+import zoot.Type;
 import zoot.arbre.ArbreAbstrait;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListeExpressions extends ArbreAbstrait {
     protected ArrayList<Expression> params;
@@ -23,6 +26,10 @@ public class ListeExpressions extends ArbreAbstrait {
 
     public int size() {
         return params.size();
+    }
+
+    public List<Type> getTypes() {
+        return params.stream().map(Expression::getType).collect(Collectors.toList());
     }
 
     @Override

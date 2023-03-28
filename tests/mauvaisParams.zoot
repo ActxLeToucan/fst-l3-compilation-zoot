@@ -1,0 +1,16 @@
+// Doit planter
+
+variables
+    entier e;
+fonctions
+    entier k(entier e;entier z; entier g; booleen y;)
+    variables
+        entier x;
+    debut
+        x = 1;
+        ecrire x;
+        retourne e;
+    fin
+debut
+    ecrire k(faux, faux, faux, 3);
+fin
