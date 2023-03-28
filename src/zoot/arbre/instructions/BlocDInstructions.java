@@ -2,6 +2,7 @@ package zoot.arbre.instructions;
 
 import zoot.arbre.ArbreAbstrait;
 import zoot.exceptions.AnalyseException;
+import zoot.exceptions.ReturnException;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -25,6 +26,15 @@ public class BlocDInstructions extends ArbreAbstrait {
         instrs.add(i);
     }
 
+    public ReturnStatement getReturn() {
+        for (Instruction inst : instrs) {
+            if (inst.isReturn()) {
+                return (ReturnStatement) inst;
+            }
+        }
+        return null;
+    }
+
     @Override
     public int verifier() {
         int nb_err = 0;
@@ -36,6 +46,7 @@ public class BlocDInstructions extends ArbreAbstrait {
                 nb_err++;
             }
         }
+
         return nb_err;
     }
 

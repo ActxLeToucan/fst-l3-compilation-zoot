@@ -7,4 +7,8 @@ public abstract class Instruction extends ArbreAbstrait {
     protected Instruction(int n) {
         super(n);
     }
+
+    public boolean isReturn() {
+        return false;
+    }
 }

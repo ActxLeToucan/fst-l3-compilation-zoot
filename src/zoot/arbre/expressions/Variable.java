@@ -1,5 +1,6 @@
 package zoot.arbre.expressions;
 
+import zoot.Type;
 import zoot.arbre.EntreeVariable;
 import zoot.arbre.SymboleVariable;
 import zoot.arbre.TableDesSymboles;

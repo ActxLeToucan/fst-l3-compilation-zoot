@@ -3,6 +3,7 @@ package zoot.arbre;
 import zoot.Type;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SymboleFonction extends Symbole {
     private final Type type;
@@ -26,5 +27,10 @@ public class SymboleFonction extends Symbole {
 
     public List<Type> getParametres() {
         return parametres;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + parametres.stream().map(Type::toString).collect(Collectors.joining(", ")) + ")";
     }
 }

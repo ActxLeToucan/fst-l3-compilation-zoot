@@ -1,0 +1,18 @@
+// Doit planter
+
+variables
+    entier e;
+fonctions
+    entier a()
+    variables
+        entier b;
+    debut
+        b = 12;
+        ecrire e;
+        retourne b;
+    fin
+debut
+    e = 2;
+    ecrire a();
+    retourne 10;
+fin

@@ -37,7 +37,7 @@ public class AppelFonction extends Expression {
         }
         List<Type> typesSymbole = sf.getParametres();
         List<Type> typesAppel = parametres.getTypes();
-        String entete = idf + "(" + typesSymbole.stream().map(Type::toString).collect(Collectors.joining(", ")) + ")";
+        String entete = idf + sf;
         if (typesSymbole.size() != typesAppel.size()) {
             throw new ParametresFonctionException(entete + "\n\t -> Nombre de paramètres incorrect (ligne " + noLigne + ")");
         }

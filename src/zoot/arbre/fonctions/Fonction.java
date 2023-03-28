@@ -7,7 +7,10 @@ import zoot.arbre.SymboleFonction;
 import zoot.arbre.TableDesSymboles;
 import zoot.arbre.declarations.BlocDeDeclaration;
 import zoot.arbre.instructions.BlocDInstructions;
+import zoot.arbre.instructions.Instruction;
+import zoot.arbre.instructions.ReturnStatement;
 import zoot.exceptions.DoubleDeclarationException;
+import zoot.exceptions.ReturnException;
 
 public class Fonction extends ArbreAbstrait {
     boolean erreur;
@@ -30,19 +33,28 @@ public class Fonction extends ArbreAbstrait {
     }
 
     public int creer() {
+        SymboleFonction sf;
         try {
-            TableDesSymboles.getInstance().ajouter(
-                    this.entree,
-                    new SymboleFonction(
-                            TableDesSymboles.getInstance().getPositionTete(),
-                            this.type,
-                            this.parametres.size(),
-                            this.parametres.getTypes()
-                    )
+            sf = new SymboleFonction(
+                    TableDesSymboles.getInstance().getPositionTete(),
+                    this.type,
+                    this.parametres.size(),
+                    this.parametres.getTypes()
             );
+            TableDesSymboles.getInstance().ajouter(this.entree, sf);
         } catch (DoubleDeclarationException e) {
             throw new DoubleDeclarationException("Fonction " + idf + " déjà déclarée (ligne " + noLigne + ")");
         }
+        ReturnStatement returnStatement = instructions.getReturn();
+        String entete = idf + sf;
+        if (returnStatement == null) {
+            throw new ReturnException(entete + "\n\t -> Fonction sans return (ligne " + noLigne + ")");
+        }
+        // TODO: verifier le type de retour
+//        Type returnType = returnStatement.getType();
+//        if (returnType != type) {
+//            throw new ReturnException(entete + "\n\t -> Type de retour incorrect. Attendu: " + type + ", obtenu: " + returnType + " (ligne " + noLigne + ")");
+//        }
         return 0;
     }
 

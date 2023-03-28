@@ -3,6 +3,8 @@ package zoot.arbre;
 import zoot.arbre.declarations.BlocDeDeclaration;
 import zoot.arbre.fonctions.BlocDeFonctions;
 import zoot.arbre.instructions.BlocDInstructions;
+import zoot.arbre.instructions.ReturnStatement;
+import zoot.exceptions.ReturnException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +28,15 @@ public class Prog extends ArbreAbstrait {
         int nb_err_decl = blocDeDeclaration.verifier();
         int nb_err_fonc = blocDeFonction.verifier();
         int nb_err_inst = blocDInstructions.verifier();
+        ReturnStatement returnStatement = blocDInstructions.getReturn();
+        try {
+            if (returnStatement != null) {
+                throw new ReturnException("return en dehors d'une fonction (ligne " + noLigne + ")");
+            }
+        } catch (ReturnException e) {
+            System.out.println(e.getMessage());
+            nb_err_inst++;
+        }
         return nb_err_decl + nb_err_fonc + nb_err_inst;
     }
 

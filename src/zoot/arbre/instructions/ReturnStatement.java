@@ -1,5 +1,6 @@
 package zoot.arbre.instructions;
 
+import zoot.Type;
 import zoot.arbre.expressions.Expression;
 
 public class ReturnStatement extends Instruction {
@@ -12,6 +13,15 @@ public class ReturnStatement extends Instruction {
 
     public ReturnStatement(int n) {
         super(n);
+    }
+
+    public Type getType() {
+        return expression.getType();
+    }
+
+    @Override
+    public boolean isReturn() {
+        return true;
     }
 
     @Override
