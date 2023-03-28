@@ -33,7 +33,8 @@ public class AppelFonction extends Expression {
             sf = (SymboleFonction) TableDesSymboles.getInstance().identifier(this.entree);
             this.setType(sf.getType());
         } catch (AnalyseException e) {
-            throw new FonctionNonDeclareeException("Fonction " + idf + " avec " + parametres.size() + " paramètre" + (parametres.size() > 1 ? "s" : "") + " non déclarée (ligne " + noLigne + ")");
+            String entete = idf + "(" + parametres.getTypes().stream().map(Type::toString).collect(Collectors.joining(", ")) + ")";
+            throw new FonctionNonDeclareeException(entete + " non déclarée (ligne " + noLigne + ")");
         }
         List<Type> typesSymbole = sf.getParametres();
         List<Type> typesAppel = parametres.getTypes();

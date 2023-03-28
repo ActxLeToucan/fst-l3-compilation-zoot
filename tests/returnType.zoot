@@ -1,4 +1,4 @@
-// Doit planter : retourne en dehors d'une fonction
+// Doit planter : mauvais type de retour
 
 variables
     entier e;
@@ -6,13 +6,14 @@ fonctions
     entier a()
     variables
         entier b;
+        booleen c;
     debut
         b = 12;
         ecrire e;
-        retourne b;
+        c = vrai;
+        retourne c;
     fin
 debut
     e = 2;
     ecrire a();
-    retourne 10;
 fin
