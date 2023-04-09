@@ -36,6 +36,9 @@ public class AppelFonction extends Expression {
             String entete = idf + "(" + parametres.getTypes().stream().map(Type::toString).collect(Collectors.joining(", ")) + ")";
             throw new FonctionNonDeclareeException(entete + " non déclarée (ligne " + noLigne + ")");
         }
+
+        parametres.verifier();
+
         List<Type> typesSymbole = sf.getParametres();
         List<Type> typesAppel = parametres.getTypes();
         String entete = idf + sf;

@@ -34,6 +34,9 @@ public class ListeExpressions extends ArbreAbstrait {
 
     @Override
     public int verifier() {
+        for (Expression param : params) {
+            param.verifier();
+        }
         return 0;
     }
 
@@ -47,5 +50,10 @@ public class ListeExpressions extends ArbreAbstrait {
             str += "addi $sp, $sp, -4\n";
         }
         return str;
+    }
+
+    @Override
+    public String toString() {
+        return params.toString();
     }
 }
