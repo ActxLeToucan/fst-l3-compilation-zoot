@@ -32,4 +32,9 @@ public class Variable extends Expression {
         return "\n# On load " + idf + " dans $v0" +
                 "\nlw $v0, " + s.getDeplacement() + "($" + s.getBase().getRegister() + ")\n";
     }
+
+    @Override
+    public String toString() {
+        return idf + " : " + s.getType();
+    }
 }

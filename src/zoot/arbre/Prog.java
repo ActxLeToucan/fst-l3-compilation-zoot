@@ -31,7 +31,7 @@ public class Prog extends ArbreAbstrait {
         ReturnStatement returnStatement = blocDInstructions.getReturn();
         try {
             if (returnStatement != null) {
-                throw new ReturnException("return en dehors d'une fonction (ligne " + noLigne + ")");
+                throw new ReturnException("'retourne' en dehors d'une fonction (ligne " + returnStatement.noLigne + ")");
             }
         } catch (ReturnException e) {
             System.out.println(e.getMessage());

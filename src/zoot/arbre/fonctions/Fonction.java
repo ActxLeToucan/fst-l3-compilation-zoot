@@ -45,16 +45,6 @@ public class Fonction extends ArbreAbstrait {
         } catch (DoubleDeclarationException e) {
             throw new DoubleDeclarationException("Fonction " + idf + " déjà déclarée (ligne " + noLigne + ")");
         }
-        ReturnStatement returnStatement = instructions.getReturn();
-        String entete = idf + sf;
-        if (returnStatement == null) {
-            throw new ReturnException(entete + "\n\t -> Fonction sans return (ligne " + noLigne + ")");
-        }
-        // TODO: verifier le type de retour
-//        Type returnType = returnStatement.getType();
-//        if (returnType != type) {
-//            throw new ReturnException(entete + "\n\t -> Type de retour incorrect. Attendu: " + type + ", obtenu: " + returnType + " (ligne " + noLigne + ")");
-//        }
         return 0;
     }
 
@@ -64,6 +54,18 @@ public class Fonction extends ArbreAbstrait {
         int resParams = parametres.verifier();
         int resVars = variables.verifier();
         int resInsts = instructions.verifier();
+
+        SymboleFonction sf = (SymboleFonction) TableDesSymboles.getInstance().identifier(this.entree);
+        ReturnStatement returnStatement = instructions.getReturn();
+        String entete = idf + sf;
+        if (returnStatement == null) {
+            throw new ReturnException(entete + "\n\t -> Fonction sans 'retourne' (ligne " + noLigne + ")");
+        }
+
+        Type returnType = returnStatement.getType();
+        if (returnType != type) {
+            throw new ReturnException(entete + "\n\t -> Type de 'retourne' incorrect. Attendu: " + type + ", obtenu: " + returnType + " (ligne " + noLigne + ")");
+        }
         return resParams + resVars + resInsts;
     }
 
