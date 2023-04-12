@@ -1,0 +1,27 @@
+// Doit afficher
+// faux
+// 666
+// 666
+// vrai
+
+variables
+    booleen x;
+fonctions
+    booleen f( booleen x; )
+    variables
+        booleen a;
+        booleen b;
+    debut
+        a = vrai;
+        b = faux;
+        ecrire x;
+        repeter
+            x = b;
+            b = a;
+            ecrire 666;
+        jusqua x finrepeter
+        retourne x;
+    fin
+debut
+    ecrire f(faux);
+fin

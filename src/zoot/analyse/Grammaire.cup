@@ -60,7 +60,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    DEBUT, FIN, POINTVIRGULE, ECRIRE, VARIABLES , FONCTIONS, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, VIRGULE, RETURN, SI, ALORS, SINON, FINSI ;
+terminal Symbol    DEBUT, FIN, POINTVIRGULE, ECRIRE, VARIABLES , FONCTIONS, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, VIRGULE, RETURN, SI, ALORS, SINON, FINSI, REPETER, JUSQUA, FINREPETER ;
 terminal String    CSTENTIERE, CSTBOOLEENNE, IDF, ENTIER, BOOLEEN, AFC ;
    
 /* Non terminals used in the grammar section.  */
@@ -72,6 +72,7 @@ non terminal BlocDeFonctions LFONCTION ;
 non terminal ListeExpressions LEXP, LEXP_OPTIONNELLE ;
 non terminal Instruction INST ;
 non terminal Condition COND ;
+non terminal Boucle LOOP ;
 non terminal Expression EXP ;
 non terminal Declaration DECL ;
 non terminal Fonction FONCTION ;
@@ -134,6 +135,9 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
         |
                 COND:c
                 {: RESULT = c ; :}
+        |
+                LOOP:l
+                {: RESULT = l ; :}
                 ;
 
 COND   ::=      SI EXP:e ALORS  LINST:li  FINSI
@@ -141,6 +145,10 @@ COND   ::=      SI EXP:e ALORS  LINST:li  FINSI
         |
                 SI EXP:e ALORS  LINST:li  SINON  LINST:li2  FINSI
                 {: RESULT = new SiSinon(e, li, li2, eleft + 1) ; :}
+                ;
+
+LOOP   ::=      REPETER  LINST:li  JUSQUA EXP:e  FINREPETER
+                {: RESULT = new Boucle(li, e, eleft + 1) ; :}
                 ;
     
 EXP    ::=      CSTENTIERE:c

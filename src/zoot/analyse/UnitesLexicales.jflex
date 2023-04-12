@@ -51,6 +51,10 @@ type = entier|booleen
 "alors"                { return symbol(CodesLexicaux.ALORS); }
 "finsi"                { return symbol(CodesLexicaux.FINSI); }
 
+"repeter"              { return symbol(CodesLexicaux.REPETER); }
+"jusqua"               { return symbol(CodesLexicaux.JUSQUA); }
+"finrepeter"           { return symbol(CodesLexicaux.FINREPETER); }
+
 "booleen"              { return symbol(CodesLexicaux.BOOLEEN, yytext()); }
 "entier"               { return symbol(CodesLexicaux.ENTIER, yytext()); }
 "="                    { return symbol(CodesLexicaux.AFC); }
