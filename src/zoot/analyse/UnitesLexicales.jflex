@@ -46,6 +46,11 @@ type = entier|booleen
 "debut"                { return symbol(CodesLexicaux.DEBUT); }
 "fin"              	   { return symbol(CodesLexicaux.FIN); }
 
+"si"                   { return symbol(CodesLexicaux.SI); }
+"sinon"                { return symbol(CodesLexicaux.SINON); }
+"alors"                { return symbol(CodesLexicaux.ALORS); }
+"finsi"                { return symbol(CodesLexicaux.FINSI); }
+
 "booleen"              { return symbol(CodesLexicaux.BOOLEEN, yytext()); }
 "entier"               { return symbol(CodesLexicaux.ENTIER, yytext()); }
 "="                    { return symbol(CodesLexicaux.AFC); }

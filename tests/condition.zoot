@@ -1,0 +1,23 @@
+// Doit afficher
+// faux
+// vrai
+// vrai
+
+variables
+    booleen x;
+fonctions
+    booleen f( booleen x; )
+    variables
+        entier a;
+    debut
+        ecrire x;
+        si x alors
+            retourne x;
+        sinon
+            retourne f(vrai);
+        finsi
+        retourne x;
+    fin
+debut
+    ecrire f(faux);
+fin

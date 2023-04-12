@@ -6,6 +6,7 @@
 
 variables
     entier e;
+    entier a;
 fonctions
     entier a()
     variables
@@ -26,5 +27,5 @@ fonctions
 debut
     e = 2;
     ecrire a();
-    ecrire c(10);
+    ecrire c(2);
 fin
