@@ -73,9 +73,9 @@ public class AppelFonction extends Expression {
         String setup = "\n# Appel de fonction (" + idf + ")" +
                 "\n# Resultat de fonction\naddi $sp, $sp, -4" +
                 "\n# Adresse de retour\naddi $sp, $sp, -4\nsw $ra, 4($sp)" +
-                "\n# On mets s7 au debut des variables locales de la fonction\nmove $s7, $sp" +
                 "\n# Parametres de la fonction (" + parametres.size() + ")\n" +
                 parametres.toMIPS() +
+                "\n# On mets s7 au debut des variables locales de la fonction\nmove $s7, $sp" +
                 "";
         // appel
         String call = "\n# Appel de la fonction " + idf + "\njal " + this.entree.getLabel();

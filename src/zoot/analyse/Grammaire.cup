@@ -60,12 +60,13 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    DEBUT, FIN, POINTVIRGULE, ECRIRE, VARIABLES , FONCTIONS, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, VIRGULE, RETURN, SI, ALORS, SINON, FINSI, REPETER, JUSQUA, FINREPETER ;
+terminal Symbol    DEBUT, FIN, POINTVIRGULE, ECRIRE, VARIABLES , FONCTIONS, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, VIRGULE, RETURN, SI, ALORS, SINON, FINSI,
+                   REPETER, JUSQUA, FINREPETER, PLUS, FOIS, EGAL, DIFFERENT, INFERIEUR, ET, OU, NON, MOINS ;
 terminal String    CSTENTIERE, CSTBOOLEENNE, IDF, ENTIER, BOOLEEN, AFC ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait VARS, SCRIPT, PROG ;
+non terminal ArbreAbstrait PROG ;
 non terminal BlocDeDeclaration LDECL, LDECL_OPTIONNELLE, PARAMETRES ;
 non terminal BlocDInstructions LINST ;
 non terminal BlocDeFonctions LFONCTION ;
@@ -73,6 +74,7 @@ non terminal ListeExpressions LEXP, LEXP_OPTIONNELLE ;
 non terminal Instruction INST ;
 non terminal Condition COND ;
 non terminal Boucle LOOP ;
+non terminal Operateur OPER ;
 non terminal Expression EXP ;
 non terminal Declaration DECL ;
 non terminal Fonction FONCTION ;
@@ -150,6 +152,28 @@ COND   ::=      SI EXP:e ALORS  LINST:li  FINSI
 LOOP   ::=      REPETER  LINST:li  JUSQUA EXP:e  FINREPETER
                 {: RESULT = new Boucle(li, e, eleft + 1) ; :}
                 ;
+
+OPER    ::=     PLUS
+                {: RESULT = Operateur.PLUS ; :}
+        |
+                FOIS
+                {: RESULT = Operateur.FOIS ; :}
+        |
+                EGAL
+                {: RESULT = Operateur.EGAL ; :}
+        |
+                DIFFERENT
+                {: RESULT = Operateur.DIFFERENT ; :}
+        |
+                INFERIEUR
+                {: RESULT = Operateur.INFERIEUR ; :}
+        |
+                ET
+                {: RESULT = Operateur.ET ; :}
+        |
+                OU
+                {: RESULT = Operateur.OU ; :}
+                ;
     
 EXP    ::=      CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}
@@ -165,6 +189,12 @@ EXP    ::=      CSTENTIERE:c
         |
                 IDF:i PARENTHESE_OUVRANTE  LEXP_OPTIONNELLE:le  PARENTHESE_FERMANTE
                 {: RESULT = new AppelFonction(i, le, ileft + 1) ; :}
+        |
+                NON EXP:e
+                {: RESULT = new Inversion(e, eleft + 1) ; :}
+        |
+                MOINS EXP:e
+                {: RESULT = new Negatif(e, eleft + 1) ; :}
                 ;
 
 PARAMETRES ::=  PARENTHESE_OUVRANTE  LDECL_OPTIONNELLE:ld  PARENTHESE_FERMANTE

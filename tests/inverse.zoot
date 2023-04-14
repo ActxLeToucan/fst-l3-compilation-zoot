@@ -1,0 +1,23 @@
+// Doit afficher
+// faux
+// 666
+// 666
+// vrai
+
+variables
+    entier x;
+    entier y;
+fonctions
+    entier f( entier x; )
+    variables
+        entier a;
+    debut
+        retourne 0;
+    fin
+debut
+    x = 42;
+    y = - x;
+
+    ecrire x;
+    ecrire y;
+fin

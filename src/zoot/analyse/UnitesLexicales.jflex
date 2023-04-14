@@ -67,6 +67,16 @@ type = entier|booleen
 ")"                    { return symbol(CodesLexicaux.PARENTHESE_FERMANTE); }
 ","                    { return symbol(CodesLexicaux.VIRGULE); }
 
+"+"                    { return symbol(CodesLexicaux.PLUS); }
+"-"                    { return symbol(CodesLexicaux.MOINS); }
+"*"                    { return symbol(CodesLexicaux.FOIS); }
+"=="                   { return symbol(CodesLexicaux.EGAL); }
+"!="                   { return symbol(CodesLexicaux.DIFFERENT); }
+"<"                    { return symbol(CodesLexicaux.INFERIEUR); }
+"et"                   { return symbol(CodesLexicaux.ET); }
+"ou"                   { return symbol(CodesLexicaux.OU); }
+"non"                  { return symbol(CodesLexicaux.NON); }
+
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 {csteB}      	       { return symbol(CodesLexicaux.CSTBOOLEENNE, yytext()); }
 {idf}                  { return symbol(CodesLexicaux.IDF, yytext()); }
