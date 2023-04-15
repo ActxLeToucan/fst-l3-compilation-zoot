@@ -1,11 +1,11 @@
 // Doit afficher
+// 52
+// 666
 // faux
-// 666
-// 666
-// vrai
 
 variables
     entier x;
+    entier a;
     booleen y;
 fonctions
     entier f( entier x; )
@@ -15,9 +15,11 @@ fonctions
         retourne x;
     fin
 debut
-    x = 42;
-    y = (-x == 42);
+    x = 42 + 5 * 2; // x = 52
+    a = f(666); // a = 666
+    y = (-a) == x; // faux
 
-    ecrire x;
-    ecrire y;
+    ecrire x; // 52
+    ecrire a; // 666
+    ecrire y; // faux
 fin

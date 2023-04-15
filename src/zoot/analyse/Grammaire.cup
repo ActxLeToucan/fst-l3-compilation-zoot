@@ -80,6 +80,8 @@ non terminal Declaration DECL ;
 non terminal Fonction FONCTION ;
 non terminal Type TYPE ;
 
+precedence left PLUS, FOIS, EGAL, DIFFERENT, INFERIEUR, ET, OU ;
+
 /* ----------------------------Grammar Section-------------------- */
 
 start with PROG ;
@@ -195,7 +197,7 @@ EXP    ::=      CSTENTIERE:c
                 NON EXP:e
                 {: RESULT = new Inversion(e, eleft + 1) ; :}
         |
-                PARENTHESE_OUVRANTE EXP:e1 OPER:o EXP:e2 PARENTHESE_FERMANTE
+                EXP:e1 OPER:o EXP:e2
                 {: RESULT = new Operation(e1, o, e2, e1left + 1) ; :}
                 ;
 
