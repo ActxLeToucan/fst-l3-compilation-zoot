@@ -1,0 +1,42 @@
+// Devrait afficher :
+// 52
+// -666
+// 10
+// 52
+// vrai
+// faux
+// 52
+// -666
+// faux
+
+variables
+    entier x; // TDS: x entier, OK
+    entier a; // TDS: a entier, OK
+    booleen y;
+fonctions
+    entier f( entier x; ) // TDS: x entier, je l'avais déjà, je remplace mais ca se voit pas
+    variables
+        entier a; // TDS: a entier, je l'avais déjà, je remplace mais ca se voit pas
+    debut
+        retourne x;
+    fin
+    booleen g( booleen x; ) // TDS: x booleen, je l'avais déjà, je remplace et ca va planter
+    variables
+        booleen a; // TDS: a booleen, je l'avais déjà, je remplace et ca va planter
+    debut
+        retourne x;
+    fin
+debut
+    x = 42 + 5 * 2; // 52 => TYPE INCOMPATIBLE : Affectation de type ENTIER à une variable de type BOOLEEN
+    a = (-f(666)); // -666
+    ecrire x; // 52
+    ecrire a; // -666
+    ecrire f(10); // 10
+    ecrire x; // 52
+    ecrire g(vrai); // vrai
+    y = g(vrai) et faux; // faux
+
+    ecrire x; // 0 ?!
+    ecrire a; // 52 ?!
+    ecrire y; // faux
+fin
