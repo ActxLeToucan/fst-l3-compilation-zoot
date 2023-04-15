@@ -1,9 +1,9 @@
 package zoot.arbre.conditions;
 
 import zoot.Type;
-import zoot.arbre.ArbreAbstrait;
 import zoot.arbre.expressions.Expression;
 import zoot.arbre.instructions.Instruction;
+import zoot.arbre.instructions.ReturnStatement;
 import zoot.exceptions.TypeInvalideException;
 
 public abstract class Condition extends Instruction {
@@ -26,5 +26,13 @@ public abstract class Condition extends Instruction {
             return 1;
         }
         return 0;
+    }
+
+    public abstract ReturnStatement checkReturn(Type typeAttendu);
+    public abstract boolean isReturnAlwaysInterruptingExecution();
+
+    @Override
+    public boolean isCondition() {
+        return true;
     }
 }

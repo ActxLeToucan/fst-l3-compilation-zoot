@@ -1,7 +1,9 @@
 package zoot.arbre.conditions;
 
+import zoot.Type;
 import zoot.arbre.expressions.Expression;
 import zoot.arbre.instructions.BlocDInstructions;
+import zoot.arbre.instructions.ReturnStatement;
 
 public class Si extends Condition {
     private final BlocDInstructions siBloc;
@@ -16,6 +18,16 @@ public class Si extends Condition {
          int nbErrCond = super.verifier();
          int nbErrBloc = siBloc.verifier();
          return nbErrCond + nbErrBloc;
+    }
+
+    @Override
+    public ReturnStatement checkReturn(Type typeAttendu) {
+        return siBloc.checkReturn(typeAttendu);
+    }
+
+    @Override
+    public boolean isReturnAlwaysInterruptingExecution() {
+        return false;
     }
 
     @Override

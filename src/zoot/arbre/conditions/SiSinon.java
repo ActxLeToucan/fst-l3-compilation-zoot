@@ -1,7 +1,10 @@
 package zoot.arbre.conditions;
 
+import zoot.Type;
 import zoot.arbre.expressions.Expression;
 import zoot.arbre.instructions.BlocDInstructions;
+import zoot.arbre.instructions.ReturnStatement;
+import zoot.exceptions.ReturnException;
 
 public class SiSinon extends Condition {
     private final BlocDInstructions siBloc;
@@ -40,5 +43,20 @@ public class SiSinon extends Condition {
                 sinonBloc.toMIPS() +
                 "\n# Fin de la condition" +
                 "\n" + finSi + ":";
+    }
+
+    @Override
+    public ReturnStatement checkReturn(Type typeAttendu) {
+        ReturnStatement ret1 = siBloc.checkReturn(typeAttendu);
+        ReturnStatement ret2 = sinonBloc.checkReturn(typeAttendu);
+        if (ret1 == null || ret2 == null) {
+            return null;
+        }
+        return ret1;
+    }
+
+    @Override
+    public boolean isReturnAlwaysInterruptingExecution() {
+        return true;
     }
 }

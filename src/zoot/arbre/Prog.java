@@ -28,7 +28,7 @@ public class Prog extends ArbreAbstrait {
         int nb_err_decl = blocDeDeclaration.verifier();
         int nb_err_fonc = blocDeFonction.verifier();
         int nb_err_inst = blocDInstructions.verifier();
-        ReturnStatement returnStatement = blocDInstructions.getReturn();
+        ReturnStatement returnStatement = blocDInstructions.checkReturn(null);
         try {
             if (returnStatement != null) {
                 throw new ReturnException("'retourne' en dehors d'une fonction (ligne " + returnStatement.noLigne + ")");

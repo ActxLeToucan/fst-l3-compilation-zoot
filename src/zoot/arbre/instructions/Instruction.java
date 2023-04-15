@@ -11,4 +11,8 @@ public abstract class Instruction extends ArbreAbstrait {
     public boolean isReturn() {
         return false;
     }
+
+    public boolean isCondition() {
+        return false;
+    }
 }

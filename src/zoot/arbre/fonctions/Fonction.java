@@ -7,7 +7,6 @@ import zoot.arbre.SymboleFonction;
 import zoot.arbre.TableDesSymboles;
 import zoot.arbre.declarations.BlocDeDeclaration;
 import zoot.arbre.instructions.BlocDInstructions;
-import zoot.arbre.instructions.Instruction;
 import zoot.arbre.instructions.ReturnStatement;
 import zoot.exceptions.DoubleDeclarationException;
 import zoot.exceptions.ReturnException;
@@ -56,15 +55,10 @@ public class Fonction extends ArbreAbstrait {
         int resInsts = instructions.verifier();
 
         SymboleFonction sf = (SymboleFonction) TableDesSymboles.getInstance().identifier(this.entree);
-        ReturnStatement returnStatement = instructions.getReturn();
+        ReturnStatement returnStatement = instructions.checkReturn(type);
         String entete = idf + sf;
         if (returnStatement == null) {
             throw new ReturnException(entete + "\n\t -> Fonction sans 'retourne' (ligne " + noLigne + ")");
-        }
-
-        Type returnType = returnStatement.getType();
-        if (returnType != type) {
-            throw new ReturnException(entete + "\n\t -> Type de 'retourne' incorrect. Attendu: " + type + ", obtenu: " + returnType + " (ligne " + noLigne + ")");
         }
         return resParams + resVars + resInsts;
     }

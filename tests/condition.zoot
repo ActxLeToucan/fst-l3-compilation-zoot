@@ -16,7 +16,6 @@ fonctions
         sinon
             retourne f(vrai);
         finsi
-        retourne x;
     fin
 debut
     ecrire f(faux);

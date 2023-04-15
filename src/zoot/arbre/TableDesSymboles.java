@@ -3,10 +3,8 @@ package zoot.arbre;
 import zoot.exceptions.DoubleDeclarationException;
 import zoot.exceptions.VariableNonDeclareeException;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
 
 public class TableDesSymboles {
     private static TableDesSymboles instance = null;

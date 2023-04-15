@@ -1,5 +1,6 @@
 package zoot.arbre.instructions;
 
+import zoot.Type;
 import zoot.arbre.conditions.Condition;
 import zoot.arbre.expressions.Expression;
 
@@ -16,6 +17,16 @@ public class Boucle extends Condition {
          int nbErrCond = super.verifier();
          int nbErrBloc = insts.verifier();
          return nbErrCond + nbErrBloc;
+    }
+
+    @Override
+    public ReturnStatement checkReturn(Type typeAttendu) {
+        return insts.checkReturn(typeAttendu);
+    }
+
+    @Override
+    public boolean isReturnAlwaysInterruptingExecution() {
+        return true;
     }
 
     @Override
