@@ -2,6 +2,7 @@ package zoot.arbre.expressions;
 
 import zoot.Type;
 import zoot.exceptions.AnalyseException;
+import zoot.exceptions.TypeInvalideException;
 
 public class Operation extends Expression {
     private final Expression gauche;
@@ -27,6 +28,12 @@ public class Operation extends Expression {
         }
         try {
             this.droite.verifier();
+        } catch (AnalyseException e) {
+            System.out.println(e.getMessage());
+            errNb++;
+        }
+        try {
+            this.verifOper();
         } catch (AnalyseException e) {
             System.out.println(e.getMessage());
             errNb++;
@@ -60,6 +67,61 @@ public class Operation extends Expression {
             case INFERIEUR:
             case ET:
             case OU: setType(Type.BOOLEEN); break;
+        }
+    }
+
+    private void verifOper() {
+        switch (op) {
+            case PLUS: {
+                if (this.droite.getType() != Type.ENTIER)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur + : " + this.droite.getType() + " au lieu de ENTIER (ligne " + noLigne + ")");
+                if (this.gauche.getType() != Type.ENTIER)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur + : " + this.gauche.getType() + " au lieu de ENTIER (ligne " + noLigne + ")");
+                break;
+            }
+            case FOIS: {
+                if (this.droite.getType() != Type.ENTIER)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur * : " + this.droite.getType() + " au lieu de ENTIER (ligne " + noLigne + ")");
+                if (this.gauche.getType() != Type.ENTIER)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur * : " + this.gauche.getType() + " au lieu de ENTIER (ligne " + noLigne + ")");
+                break;
+            }
+            case EGAL: {
+                if (this.droite.getType() != Type.ENTIER)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur == : " + this.droite.getType() + " au lieu de ENTIER (ligne " + noLigne + ")");
+                if (this.gauche.getType() != Type.ENTIER)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur == : " + this.gauche.getType() + " au lieu de ENTIER (ligne " + noLigne + ")");
+                break;
+            }
+            case DIFFERENT: {
+                if (this.droite.getType() != Type.ENTIER)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur != : " + this.droite.getType() + " au lieu de ENTIER (ligne " + noLigne + ")");
+                if (this.gauche.getType() != Type.ENTIER)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur != : " + this.gauche.getType() + " au lieu de ENTIER (ligne " + noLigne + ")");
+                break;
+            }
+            case INFERIEUR: {
+                if (this.droite.getType() != Type.ENTIER)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur < : " + this.droite.getType() + " au lieu de ENTIER (ligne " + noLigne + ")");
+                if (this.gauche.getType() != Type.ENTIER)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur < : " + this.gauche.getType() + " au lieu de ENTIER (ligne " + noLigne + ")");
+                break;
+            }
+            case ET: {
+                if (this.droite.getType() != Type.BOOLEEN)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur et : " + this.droite.getType() + " au lieu de BOOLEEN (ligne " + noLigne + ")");
+                if (this.gauche.getType() != Type.BOOLEEN)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur et : " + this.gauche.getType() + " au lieu de BOOLEEN (ligne " + noLigne + ")");
+                break;
+            }
+            case OU: {
+                if (this.droite.getType() != Type.BOOLEEN)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur ou : " + this.droite.getType() + " au lieu de BOOLEEN (ligne " + noLigne + ")");
+                if (this.gauche.getType() != Type.BOOLEEN)
+                    throw new TypeInvalideException("Type invalide pour l'opérateur ou : " + this.gauche.getType() + " au lieu de BOOLEEN (ligne " + noLigne + ")");
+                break;
+            }
+            default: break;
         }
     }
 
