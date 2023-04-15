@@ -1,0 +1,23 @@
+// Doit afficher
+// faux
+// 666
+// 666
+// vrai
+
+variables
+    entier x;
+    booleen y;
+fonctions
+    entier f( entier x; )
+    variables
+        entier a;
+    debut
+        retourne x;
+    fin
+debut
+    x = 42;
+    y = (-x == 42);
+
+    ecrire x;
+    ecrire y;
+fin

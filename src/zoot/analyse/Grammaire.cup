@@ -85,8 +85,7 @@ non terminal Type TYPE ;
 start with PROG ;
 
 PROG    ::=     VARIABLES  LDECL:ld  FONCTIONS  LFONCTION:lf  DEBUT  LINST:li  FIN
-                {: Prog p = new Prog(0, ld, lf, li);
-                   RESULT = p ; :}
+                {: RESULT = new Prog(0, ld, lf, li) ; :}
                 ;
 
 TYPE    ::=     ENTIER
@@ -153,25 +152,25 @@ LOOP   ::=      REPETER  LINST:li  JUSQUA EXP:e  FINREPETER
                 {: RESULT = new Boucle(li, e, eleft + 1) ; :}
                 ;
 
-OPER    ::=     PLUS
+OPER   ::=     PLUS
                 {: RESULT = Operateur.PLUS ; :}
         |
-                FOIS
+               FOIS
                 {: RESULT = Operateur.FOIS ; :}
         |
-                EGAL
+               EGAL
                 {: RESULT = Operateur.EGAL ; :}
         |
-                DIFFERENT
+               DIFFERENT
                 {: RESULT = Operateur.DIFFERENT ; :}
         |
-                INFERIEUR
+               INFERIEUR
                 {: RESULT = Operateur.INFERIEUR ; :}
         |
-                ET
+               ET
                 {: RESULT = Operateur.ET ; :}
         |
-                OU
+               OU
                 {: RESULT = Operateur.OU ; :}
                 ;
     
@@ -190,11 +189,14 @@ EXP    ::=      CSTENTIERE:c
                 IDF:i PARENTHESE_OUVRANTE  LEXP_OPTIONNELLE:le  PARENTHESE_FERMANTE
                 {: RESULT = new AppelFonction(i, le, ileft + 1) ; :}
         |
+                MOINS EXP:e
+                {: RESULT = new Negatif(e, eleft + 1) ; :}
+        |
                 NON EXP:e
                 {: RESULT = new Inversion(e, eleft + 1) ; :}
         |
-                MOINS EXP:e
-                {: RESULT = new Negatif(e, eleft + 1) ; :}
+                PARENTHESE_OUVRANTE EXP:e1 OPER:o EXP:e2 PARENTHESE_FERMANTE
+                {: RESULT = new Operation(e1, o, e2, e1left + 1) ; :}
                 ;
 
 PARAMETRES ::=  PARENTHESE_OUVRANTE  LDECL_OPTIONNELLE:ld  PARENTHESE_FERMANTE

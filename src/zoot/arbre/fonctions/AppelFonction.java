@@ -18,6 +18,7 @@ public class AppelFonction extends Expression {
     private EntreeFonction entree;
     private boolean erreur;
     private ListeExpressions parametres;
+    private SymboleFonction sf;
 
     public AppelFonction(String idf, ListeExpressions parametres, int n) {
         super(n);
@@ -28,7 +29,6 @@ public class AppelFonction extends Expression {
 
     @Override
     public int verifier() {
-        SymboleFonction sf;
         try {
             sf = (SymboleFonction) TableDesSymboles.getInstance().identifier(this.entree);
             this.setType(sf.getType());
@@ -75,13 +75,14 @@ public class AppelFonction extends Expression {
                 "\n# Adresse de retour\naddi $sp, $sp, -4\nsw $ra, 4($sp)" +
                 "\n# Parametres de la fonction (" + parametres.size() + ")\n" +
                 parametres.toMIPS() +
-                "\n# On mets s7 au debut des variables locales de la fonction\nmove $s7, $sp" +
+                "\n# On mets s7 au debut des variables locales de la fonction" +
+                "\nmove $s7, $sp" +
+                "\naddi $s7, $s7, " + sf.getNbParams() * TableDesSymboles.ELEMENT_SIZE +
                 "";
         // appel
         String call = "\n# Appel de la fonction " + idf + "\njal " + this.entree.getLabel();
         // apres
         String teardown = "\n# Retour de la fonction " + idf +
-                // "\n# On skip les parametres de la fonction\n" +
                 "\n# Recuperation de l'adresse de retour\nlw $ra, 4($sp)\naddi $sp, $sp, 4" +
                 "\n# Recuperation de la valeur de retour\nlw $v0, 4($sp)\naddi $sp, $sp, 4" +
                 "\n# On remets s7 a sa position precedente" +

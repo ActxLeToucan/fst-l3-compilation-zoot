@@ -16,7 +16,7 @@ public class Inversion extends Expression {
     public int verifier() {
         exp.verifier();
         if (exp.getType() != Type.BOOLEEN) {
-            throw new TypeInvalideException("Type invalide pour l'opérateur ! : " + exp.getType() + " au lieu de BOOLEEN (ligne " + noLigne + ")");
+            throw new TypeInvalideException("Type invalide pour l'opérateur non : " + exp.getType() + " au lieu de BOOLEEN (ligne " + noLigne + ")");
         }
         return 0;
     }
